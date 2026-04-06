@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  secrets      Secret[]
+  accessLogs   AccessLog[]
+  mcpTokens    McpToken[]
+}
+
+model Secret {
+  id             String      @id @default(cuid())
+  userId         String
+  name           String
+  service        String      @default("custom")
+  description    String?
+  encryptedValue String
+  iv             String
+  tag            String
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  lastAccessed   DateTime?
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessLogs     AccessLog[]
+
+  @@unique([userId, name])
+}
+
+model AccessLog {
+  id        String   @id @default(cuid())
+  userId    String
+  secretId  String?
+  action    String
+  ipAddress String?
+  userAgent String?
+  source    String   @default("web")
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  secret    Secret?  @relation(fields: [secretId], references: [id], onDelete: SetNull)
+}
+
+model McpToken {
+  id        String    @id @default(cuid())
+  userId    String
+  name      String
+  token     String    @unique
+  lastUsed  DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
