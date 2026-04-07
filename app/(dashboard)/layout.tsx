@@ -35,7 +35,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   async function handleLogout() {
     setLoggingOut(true)
     await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/login')
+    router.push('/')
   }
 
   return (
@@ -65,12 +65,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
 
           <span className="nav-label" style={{ marginTop: 12 }}>Resources</span>
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="nav-item">
+          <Link href="/docs" className={`nav-item ${pathname === '/docs' ? 'active' : ''}`}>
             <span className="nav-icon"><Book size={18} /></span>Docs
-          </a>
-          <a href="mailto:support@vaultix.dev" className="nav-item">
+          </Link>
+          <Link href="/support" className={`nav-item ${pathname === '/support' ? 'active' : ''}`}>
             <span className="nav-icon"><LifeBuoy size={18} /></span>Support
-          </a>
+          </Link>
         </nav>
 
         <div className="sidebar-footer">
