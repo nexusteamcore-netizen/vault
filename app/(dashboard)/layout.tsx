@@ -19,9 +19,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [booting, setBooting] = useState(true)
 
   useEffect(() => {
-    const t = setTimeout(() => setBooting(false), 800)
-    return () => clearTimeout(t)
-  }, [])
+    async function checkAuth() {
+      try {
+        const res = await fetch('/api/auth/me')
+        if (!res.ok) router.push('/login')
+      } catch {
+        router.push('/login')
+      } finally {
+        setBooting(false)
+      }
+    }
+    checkAuth()
+  }, [router])
 
   async function handleLogout() {
     setLoggingOut(true)

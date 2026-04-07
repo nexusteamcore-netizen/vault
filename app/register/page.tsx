@@ -34,33 +34,34 @@ export default function RegisterPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-orb" />
       <div className="auth-box">
         <div className="auth-logo boot-text">
-          <TerminalSquare size={20} className="blink" />
-          <span style={{ marginLeft: 8, letterSpacing: '0.1em' }}>VAULTIX_</span>
+          <TerminalSquare size={28} className="text-green" />
+          <span className="brand-text">VAULTIX</span>
         </div>
-        <h1 className="auth-title mono">{'>'} ESTABLISH_NEW_NODE</h1>
-        <p className="auth-subtitle mono">{'>'} Generate initial encryption keys</p>
+        <h1 className="auth-title">Create Account</h1>
+        <p className="auth-subtitle">Secure your assets with Vaultix</p>
+        
         {error && <div className="auth-error">{error}</div>}
+        
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label className="input-label" htmlFor="name">Full name</label>
-            <input id="name" type="text" className="input" placeholder="Jane Smith" value={name} onChange={e => setName(e.target.value)} />
+            <label className="input-label" htmlFor="name">Full Designation</label>
+            <input id="name" type="text" className="input" placeholder="Enter your designation" value={name} onChange={e => setName(e.target.value)} />
           </div>
           <div className="input-group">
-            <label className="input-label" htmlFor="email">Email</label>
-            <input id="email" type="email" className="input" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} required />
+            <label className="input-label" htmlFor="email">Security Email</label>
+            <input id="email" type="email" className="input" placeholder="operator@company.com" value={email} onChange={e => setEmail(e.target.value)} required />
           </div>
           <div className="input-group">
-            <label className="input-label" htmlFor="password">Password</label>
-            <input id="password" type="password" className="input" placeholder="At least 8 characters" value={password} onChange={e => setPassword(e.target.value)} required minLength={8} />
+            <label className="input-label" htmlFor="password">New Password</label>
+            <input id="password" type="password" className="input" placeholder="Min 8 characters" value={password} onChange={e => setPassword(e.target.value)} required minLength={8} />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg mono" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: 8 }}>
-            {loading ? <><span className="spinner" />GENERATING_KEYS...</> : '[ INITIALIZE_VAULT ]'}
+          <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: 12 }}>
+            {loading ? <><span className="spinner" /> Generating Keys...</> : 'Initialize Vault'}
           </button>
         </form>
-        <p className="auth-switch mono">{'>'} NODE_ALREADY_EXISTS? <Link href="/login">SECURE_LOGIN</Link></p>
+        <p className="auth-switch">Already registered? <Link href="/login">Secure Login</Link></p>
       </div>
     </div>
   )

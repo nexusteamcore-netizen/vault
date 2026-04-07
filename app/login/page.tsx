@@ -33,29 +33,30 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-orb" />
       <div className="auth-box">
         <div className="auth-logo boot-text">
-          <TerminalSquare size={20} className="blink" />
-          <span style={{ marginLeft: 8, letterSpacing: '0.1em' }}>VAULTIX_</span>
+          <TerminalSquare size={28} className="text-green" />
+          <span className="brand-text">VAULTIX</span>
         </div>
-        <h1 className="auth-title mono">{'>'} SECURE_LOGIN_PORTAL</h1>
-        <p className="auth-subtitle mono">{'>'} Initiate connection to encrypted core</p>
+        <h1 className="auth-title">Secure Access</h1>
+        <p className="auth-subtitle">Authenticate to your encrypted workspace</p>
+        
         {error && <div className="auth-error">{error}</div>}
+        
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label className="input-label" htmlFor="email">Email</label>
-            <input id="email" type="email" className="input" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} required />
+            <label className="input-label" htmlFor="email">Email Address</label>
+            <input id="email" type="email" className="input" placeholder="name@company.com" value={email} onChange={e => setEmail(e.target.value)} required />
           </div>
           <div className="input-group">
-            <label className="input-label" htmlFor="password">Password</label>
-            <input id="password" type="password" className="input" placeholder="••••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
+            <label className="input-label" htmlFor="password">Access Password</label>
+            <input id="password" type="password" className="input" placeholder="••••••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg mono" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: 8 }}>
-            {loading ? <><span className="spinner" />DECRYPTING_HANDSHAKE...</> : '[ INITIATE_CONNECTION ]'}
+          <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: 12 }}>
+            {loading ? <><span className="spinner" /> Authenticating...</> : 'Login to Vault'}
           </button>
         </form>
-        <p className="auth-switch mono">{'>'} NO_ACCOUNT_DETECTED? <Link href="/register">ESTABLISH_NEW_NODE</Link></p>
+        <p className="auth-switch">New operator? <Link href="/register">Create an account</Link></p>
       </div>
     </div>
   )

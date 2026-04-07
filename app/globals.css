@@ -1576,36 +1576,62 @@ tr:hover td {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 40px;
+  background: radial-gradient(circle at 50% 50%, #080c08 0%, #000000 100%);
   position: relative;
   overflow: hidden;
 }
 
-.auth-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0, 255, 65, 0.08) 0%, transparent 70%);
-  top: -100px;
-  right: -100px;
-}
-
 .auth-box {
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;
+  min-height: 580px; /* Fixed height for stability */
+  display: flex;
+  flex-direction: column;
   background: rgba(10, 15, 10, 0.4);
-  backdrop-filter: blur(16px);
-  /* ─── Vault Unified Workspace (Advanced OLED) ───────────── */
-  border: 1px solid rgba(0, 255, 65, 0.08);
-  border-radius: var(--radius-xl);
-  padding: 40px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.02);
-  animation: fadeUp 0.5s ease;
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 255, 65, 0.15);
+  border-radius: var(--radius-2xl);
+  padding: 48px; /* Balanced padding */
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.8), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.04),
+              0 0 40px rgba(0, 255, 65, 0.03);
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  z-index: 1;
+  z-index: 10;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between label and input */
+  margin-bottom: 4px;
+}
+
+.input-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--green);
+  opacity: 0.85;
+}
+
+/* Subtle aliveness */
+.auth-box::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: inherit;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: breathingGlow 4s ease-in-out infinite;
+}
+
+@keyframes breathingGlow {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.15; }
 }
 
 /* ─── Vault Unified Workspace (Advanced OLED) ───────────── */
