@@ -1,20 +1,11 @@
 import { prisma } from '@/lib/db'
 import { decrypt, encrypt } from '@/lib/crypto'
-
-async function authenticate(request: Request) {
-  const auth = request.headers.get('authorization')
-  if (!auth?.startsWith('Bearer ')) return null
-  const token = auth.slice(7)
-  const mcpToken = await prisma.mcpToken.findUnique({ where: { token }, include: { user: true } })
-  if (!mcpToken) return null
-  await prisma.mcpToken.update({ where: { token }, data: { lastUsed: new Date() } })
-  return mcpToken.user
-}
+import { requireApiToken } from '@/lib/auth'
 
 export async function POST(request: Request) {
   try {
-    const user = await authenticate(request)
-    if (!user) return Response.json({ error: 'Invalid or missing MCP token' }, { status: 401 })
+    const user = await requireApiToken(request)
+    if (!user) return Response.json({ error: 'Invalid or missing access token' }, { status: 401 })
 
     const body = await request.json()
     const { tool, params } = body

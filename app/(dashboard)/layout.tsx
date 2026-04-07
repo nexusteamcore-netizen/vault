@@ -2,11 +2,12 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { LayoutDashboard, KeyRound, Activity, Cpu, Settings, Book, LifeBuoy, KeySquare } from 'lucide-react'
+import { LayoutDashboard, KeyRound, Activity, Cpu, Settings, Book, LifeBuoy, KeySquare, Code } from 'lucide-react'
 
 const NAV = [
   { href: '/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
   { href: '/vault', icon: <KeyRound size={18} />, label: 'Vault' },
+  { href: '/sdk', icon: <Code size={18} />, label: 'Developer SDK' },
   { href: '/logs', icon: <Activity size={18} />, label: 'Access Logs' },
   { href: '/mcp', icon: <Cpu size={18} />, label: 'MCP Integration' },
   { href: '/settings', icon: <Settings size={18} />, label: 'Settings' },
@@ -67,9 +68,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <span className="nav-label" style={{ marginTop: 12 }}>Resources</span>
           <Link href="/docs" className={`nav-item ${pathname === '/docs' ? 'active' : ''}`}>
             <span className="nav-icon"><Book size={18} /></span>Docs
-          </Link>
-          <Link href="/support" className={`nav-item ${pathname === '/support' ? 'active' : ''}`}>
-            <span className="nav-icon"><LifeBuoy size={18} /></span>Support
           </Link>
         </nav>
 

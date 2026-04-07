@@ -108,11 +108,11 @@ export default function DashboardPage() {
                   padding: '16px', borderBottom: index === arr.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.04)'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <div style={{ 
-                      width: 36, height: 36, borderRadius: '50%', 
-                      background: log.source === 'mcp' ? 'rgba(0, 255, 255, 0.08)' : 'rgba(0, 255, 0, 0.08)', 
+                    <div style={{
+                      width: 36, height: 36, borderRadius: '50%',
+                      background: log.source === 'mcp' ? 'rgba(0, 255, 255, 0.08)' : 'rgba(0, 255, 0, 0.08)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: log.source === 'mcp' ? 'var(--cyan)' : 'var(--accent)' 
+                      color: log.source === 'mcp' ? 'var(--cyan)' : 'var(--accent)'
                     }}>
                       {log.source === 'mcp' ? <Cpu size={16} /> : <Globe size={16} />}
                     </div>
@@ -123,11 +123,11 @@ export default function DashboardPage() {
                         </span>
                         <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>on</span>
                         {log.secret ? (
-                           <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)' }}>{log.secret.name}</span>
+                          <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)' }}>{log.secret.name}</span>
                         ) : (
-                           <span className="badge badge-muted" style={{ fontSize: 10, padding: '2px 6px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                             System Profile
-                           </span>
+                          <span className="badge badge-muted" style={{ fontSize: 10, padding: '2px 6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                            System Profile
+                          </span>
                         )}
                       </div>
                       <div style={{ fontSize: 12, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 8 }}>

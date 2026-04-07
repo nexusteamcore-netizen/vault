@@ -1,0 +1,15 @@
+{
+  "name": "@vaultix/cli",
+  "version": "1.0.0",
+  "description": "Vaultix official CLI tool fetching secrets right from your terminal",
+  "main": "bin/cli.js",
+  "bin": {
+    "vaultix": "./bin/cli.js"
+  },
+  "dependencies": {
+    "@vaultix/sdk": "file:../vaultix-sdk"
+  },
+  "keywords": ["vaultix", "cli", "secrets", "api"],
+  "author": "Vaultix Team",
+  "license": "MIT"
+}

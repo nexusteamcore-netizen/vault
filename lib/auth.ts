@@ -18,6 +18,16 @@ export async function requireSession(): Promise<SessionUser> {
   return session
 }
 
+export async function requireApiToken(request: Request) {
+  const auth = request.headers.get('authorization')
+  if (!auth?.startsWith('Bearer ')) return null
+  const token = auth.slice(7)
+  const mcpToken = await prisma.mcpToken.findUnique({ where: { token }, include: { user: true } })
+  if (!mcpToken) return null
+  await prisma.mcpToken.update({ where: { token }, data: { lastUsed: new Date() } })
+  return mcpToken.user
+}
+
 export async function logAccess(params: {
   userId: string
   secretId?: string
