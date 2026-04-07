@@ -10,7 +10,7 @@ export function proxy(request: NextRequest) {
 
   // Protected routes mapping
   const PROTECTED_ROUTES = ['/dashboard', '/vault', '/logs', '/mcp', '/settings']
-  const isProtectedRoute = PROTECTED_ROUTES.some(route => pathname.startsWith(route))
+  const isProtectedRoute = PROTECTED_ROUTES.some(route => pathname === route || pathname.startsWith(route + '/'))
 
   if (isProtectedRoute && !token) {
     const url = new URL('/login', request.url)
