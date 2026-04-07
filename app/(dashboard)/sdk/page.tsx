@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export default function SdkPage() {
   const [toast, setToast] = useState<{ msg: string; type: string } | null>(null)
+  const [isReady, setIsReady] = useState(false) // Toggle this to true to restore the UI
 
   function showToast(msg: string, type = 'info') {
     setToast({ msg, type })
@@ -14,6 +15,25 @@ export default function SdkPage() {
   function copy(text: string) {
     navigator.clipboard.writeText(text)
     showToast('Copied to clipboard!', 'success')
+  }
+
+  if (!isReady) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        height: '60vh',
+        fontFamily: 'sans-serif'
+      }}>
+        <h1 style={{ 
+          fontSize: 16, 
+          fontWeight: 400, 
+          color: 'var(--text-muted)',
+          letterSpacing: '0.1em'
+        }}>Coming Soon</h1>
+      </div>
+    )
   }
 
   return (
@@ -98,9 +118,9 @@ export default function SdkPage() {
                   fontSize: 13,
                   lineHeight: 1.6
                 }} className="mono">
-<span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@vaultix/sdk'</span>;{'\n\n'}
-<span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n'}
-<span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"STRIPE_KEY"</span>);
+  <span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@vaultix/sdk'</span>;{'\n\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"STRIPE_KEY"</span>);
                 </pre>
                 <button 
                   className="btn btn-ghost btn-sm" 
@@ -134,12 +154,12 @@ export default function SdkPage() {
               fontSize: 13,
               overflowX: 'auto'
             }} className="mono">
-<span style={{ color: '#ff7b72' }}>const</span> response = <span style={{ color: '#ff7b72' }}>await</span> fetch(<span style={{ color: '#a5d6ff' }}>'https://yourapp.net/api/v1/secrets/STRIPE_KEY'</span>, {'{\n'}
-  headers: {'{\n'}
-    <span style={{ color: '#79c0ff' }}>'Authorization'</span>: <span style={{ color: '#a5d6ff' }}>'Bearer vtx_your_api_key_here'</span>{'\n'}
-  {'}\n'}
-{'}'});{'\n'}
-<span style={{ color: '#ff7b72' }}>const</span> {'{ name, value }'} = <span style={{ color: '#ff7b72' }}>await</span> response.json();
+  <span style={{ color: '#ff7b72' }}>const</span> response = <span style={{ color: '#ff7b72' }}>await</span> fetch(<span style={{ color: '#a5d6ff' }}>'https://yourapp.net/api/v1/secrets/STRIPE_KEY'</span>, {'{\n'}
+    headers: {'{\n'}
+      <span style={{ color: '#79c0ff' }}>'Authorization'</span>: <span style={{ color: '#a5d6ff' }}>'Bearer vtx_your_api_key_here'</span>{'\n'}
+    {'}\n'}
+  {'}'});{'\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> {'{ name, value }'} = <span style={{ color: '#ff7b72' }}>await</span> response.json();
             </pre>
           </div>
         </div>
