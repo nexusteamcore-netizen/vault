@@ -35,14 +35,14 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-box">
-        <div className="auth-logo boot-text" style={{ marginBottom: 40, justifyContent: 'center' }}>
+        <div className="auth-logo boot-text" style={{ marginBottom: 28, justifyContent: 'center' }}>
           <TerminalSquare size={28} className="text-green" />
           <span style={{ marginLeft: 12, letterSpacing: '0.25em', fontWeight: 800 }}>VAULTIX</span>
         </div>
         <h1 className="auth-title" style={{ fontSize: 28, fontWeight: 700, textAlign: 'center', marginBottom: 8, letterSpacing: '-0.02em' }}>Create Account</h1>
-        <p className="auth-subtitle" style={{ textAlign: 'center', marginBottom: 40, fontSize: 15, opacity: 0.7 }}>Secure your assets with Vaultix</p>
+        <p className="auth-subtitle" style={{ textAlign: 'center', marginBottom: 24, fontSize: 15, opacity: 0.7 }}>Secure your assets with Vaultix</p>
 
-        {error && <div className="auth-error" style={{ marginBottom: 24 }}>{error}</div>}
+        {error && <div className="auth-error" style={{ marginBottom: 16 }}>{error}</div>}
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="input-group">
@@ -61,7 +61,7 @@ export default function RegisterPage() {
             {loading ? <><span className="spinner" /> Generating Keys...</> : 'Initialize Vault'}
           </button>
         </form>
-        <p className="auth-switch" style={{ textAlign: 'center', marginTop: 40, fontSize: 14, opacity: 0.8 }}>Already registered? <Link href="/login" style={{ color: 'var(--green)', fontWeight: 600 }}>Secure Login</Link></p>
+        <p className="auth-switch" style={{ textAlign: 'center', marginTop: 24, fontSize: 14, opacity: 0.8 }}>Already registered? <Link href="/login" style={{ color: 'var(--green)', fontWeight: 600 }}>Secure Login</Link></p>
       </div>
     </div>
   )

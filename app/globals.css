@@ -1585,19 +1585,30 @@ tr:hover td {
 .auth-box {
   width: 100%;
   max-width: 480px;
-  /* Billion-Dollar Golden Ratio */
+  min-height: 520px;
+  /* Fixed — same for login & register */
   background: rgba(10, 15, 10, 0.4);
   backdrop-filter: blur(24px);
   border: 1px solid rgba(0, 255, 65, 0.15);
   border-radius: var(--radius-2xl);
-  padding: 52px;
-  /* Perfect balance between space and focus */
+  padding: 48px 52px;
+  /* Slightly less vertical padding */
   box-shadow: 0 32px 64px rgba(0, 0, 0, 0.8),
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     0 0 40px rgba(0, 255, 65, 0.03);
   animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   z-index: 10;
+}
+
+/* Fix: space between label and input box */
+.auth-form .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Gap between label and input */
+  margin-bottom: 16px;
+  /* Space between each field */
 }
 
 /* Subtle aliveness */
