@@ -75,7 +75,7 @@ export default function McpPage() {
     mcpServers: {
       vaultix: {
         command: 'npx',
-        args: ['-y', 'vaultix-mcp'],
+        args: ['-y', `${appUrl || 'https://your-domain.com'}/vaultix-mcp.tgz`],
         env: { VAULTIX_TOKEN: token, VAULTIX_URL: `${appUrl || 'https://your-domain.com'}/api/mcp` },
       },
     },
