@@ -4,9 +4,10 @@ import { Bot, Copy, Eye, EyeOff, Key } from 'lucide-react'
 
 interface McpToken { id: string; name: string; token: string; lastUsed?: string; createdAt: string }
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
 
 export default function McpPage() {
+  const [appUrl, setAppUrl] = useState('')
+
   const [tokens, setTokens] = useState<McpToken[]>([])
   const [loading, setLoading] = useState(true)
   const [newName, setNewName] = useState('')
@@ -26,7 +27,10 @@ export default function McpPage() {
     setLoading(false)
   }
 
-  useEffect(() => { loadTokens() }, [])
+  useEffect(() => { 
+    loadTokens()
+    if (typeof window !== 'undefined') setAppUrl(window.location.origin)
+  }, [])
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
@@ -72,7 +76,7 @@ export default function McpPage() {
       vaultix: {
         command: 'npx',
         args: ['-y', 'vaultix-mcp'],
-        env: { VAULTIX_TOKEN: token, VAULTIX_URL: `${APP_URL}/api/mcp` },
+        env: { VAULTIX_TOKEN: token, VAULTIX_URL: `${appUrl || 'https://your-domain.com'}/api/mcp` },
       },
     },
   }, null, 2)
@@ -115,8 +119,8 @@ export default function McpPage() {
         <div className="card fade-up" style={{ animationDelay: '0.05s' }}>
           <h2 style={{ fontSize: 15, fontWeight: 600, marginBottom: 16 }}>MCP Endpoint</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div className="key-masked mono" style={{ flex: 1 }}>{APP_URL}/api/mcp</div>
-            <button className="btn btn-secondary btn-sm mono" onClick={() => copy(`${APP_URL}/api/mcp`)}><Copy size={14} style={{ marginRight: 6 }} /> COPY_URL</button>
+            <div className="key-masked mono" style={{ flex: 1 }}>{appUrl || 'https://your-domain.com'}/api/mcp</div>
+            <button className="btn btn-secondary btn-sm mono" onClick={() => copy(`${appUrl || 'https://your-domain.com'}/api/mcp`)}><Copy size={14} style={{ marginRight: 6 }} /> COPY_URL</button>
           </div>
           <div style={{ marginTop: 20 }}>
             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 12, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Available Tools</div>

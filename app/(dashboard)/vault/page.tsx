@@ -160,24 +160,24 @@ export default function VaultPage() {
               <h2 className="modal-title">Add New Secret</h2>
               <button className="modal-close" onClick={() => setShowAdd(false)}>✕</button>
             </div>
-            <form onSubmit={handleAdd} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <form onSubmit={handleAdd} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div className="input-group">
                 <label className="input-label">Node Taxonomy (Category)</label>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
-                      {CATEGORIES.map(c => (
-                        <button key={c.id} type="button"
-                          onClick={() => setAddService(c.id)}
-                          style={{
-                            padding: '8px 4px', borderRadius: 'var(--radius-md)', border: '1px solid',
-                            borderColor: addService === c.id ? 'var(--accent)' : 'var(--border)',
-                            background: addService === c.id ? 'var(--accent-dim)' : 'var(--bg-input)',
-                            cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-                            fontSize: 10, color: addService === c.id ? 'var(--accent)' : 'var(--text-secondary)',
-                          }}>
-                          <span style={{ transform: 'scale(0.95)' }}>{c.icon}</span>{c.label}
-                        </button>
-                      ))}
-                    </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6, marginTop: 10 }}>
+                  {CATEGORIES.map(c => (
+                    <button key={c.id} type="button"
+                      onClick={() => setAddService(c.id)}
+                      style={{
+                        padding: '10px 4px', borderRadius: 'var(--radius-md)', border: '1px solid',
+                        borderColor: addService === c.id ? 'var(--accent)' : 'var(--border)',
+                        background: addService === c.id ? 'var(--accent-dim)' : 'var(--bg-input)',
+                        cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+                        fontSize: 12, fontWeight: 500, color: addService === c.id ? 'var(--accent)' : 'var(--text-secondary)',
+                      }}>
+                      <span style={{ transform: 'scale(0.95)' }}>{c.icon}</span>{c.label}
+                    </button>
+                  ))}
+                </div>
               </div>
               <div className="input-group">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
@@ -332,7 +332,7 @@ export default function VaultPage() {
                 <div className="card" style={{ marginBottom: 20, minWidth: 0 }}>
                   <div className="vault-list-title" style={{ marginBottom: 12, fontSize: 11 }}>Access Credential</div>
                   <div className="key-value-row" style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
-                    <div className="key-masked mono" style={{ 
+                    <div className="key-masked mono" style={{
                       flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                       background: 'rgba(255,255,255,0.02)', padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border)',
                       minWidth: 0, wordBreak: 'break-all'

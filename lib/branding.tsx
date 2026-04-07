@@ -11,7 +11,6 @@ export const CATEGORIES = [
   { id: 'cloud', label: 'Cloud / Inf', icon: <Cloud size={16} />, className: 'service-aws' },
   { id: 'devtools', label: 'DevTools', icon: <Terminal size={16} />, className: 'service-github' },
   { id: 'comms', label: 'Comms', icon: <MessageSquare size={16} />, className: 'service-aws' },
-  { id: 'marketing', label: 'Marketing', icon: <Shield size={16} />, className: 'service-openai' },
   { id: 'messaging', label: 'Email', icon: <Mail size={16} />, className: 'service-openai' },
   { id: 'custom', label: 'Custom', icon: <Key size={16} />, className: 'service-custom' },
 ]
