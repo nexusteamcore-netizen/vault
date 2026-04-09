@@ -14,7 +14,11 @@ export async function GET(request: Request) {
       take: limit,
     })
     return Response.json({ logs })
-  } catch {
-    return Response.json({ error: 'Unauthorized' }, { status: 401 })
+  } catch (err: any) {
+    if (err.message === 'Unauthorized') {
+       return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+    console.error('[Logs API Error]:', err.message)
+    return Response.json({ error: 'Server error' }, { status: 500 })
   }
 }

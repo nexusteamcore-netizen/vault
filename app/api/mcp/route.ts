@@ -12,7 +12,10 @@ export async function POST(request: Request) {
 
     const body = await request.json()
     const { tool, params } = body
-    const ip = request.headers.get('x-forwarded-for') ?? 'unknown'
+    const rawIp = request.headers.get('x-forwarded-for') ?? 
+                  request.headers.get('x-real-ip') ?? 
+                  'unknown'
+    const ip = rawIp.split(',')[0].trim()
 
     if (tool === 'list_secrets') {
       const secrets = await prisma.secret.findMany({
@@ -24,6 +27,21 @@ export async function POST(request: Request) {
         data: { userId: user.id, action: 'mcp_list', source: 'mcp', ipAddress: ip },
       })
       return Response.json({ result: secrets })
+    }
+
+    if (tool === 'get_secret') {
+      const { name } = params || {}
+      if (!name) return Response.json({ error: 'params.name required' }, { status: 400 })
+      
+      const secret = await prisma.secret.findFirst({ where: { userId: user.id, name } })
+      if (!secret) return Response.json({ error: `Secret "${name}" not found` }, { status: 404 })
+
+      activeSecretValue = decrypt(secret.encryptedValue, secret.iv, secret.tag)
+      await prisma.secret.update({ where: { id: secret.id }, data: { lastAccessed: new Date() } })
+      await prisma.accessLog.create({
+        data: { userId: user.id, secretId: secret.id, action: 'mcp_read', source: 'mcp', ipAddress: ip },
+      })
+      return Response.json({ result: { name: secret.name, value: activeSecretValue, service: secret.service } })
     }
 
     if (tool === 'set_secret') {
@@ -114,6 +132,17 @@ export async function GET() {
         inputSchema: {
           type: "object",
           properties: {}
+        }
+      },
+      { 
+        name: 'get_secret', 
+        description: 'Retrieve a decrypted secret by name', 
+        inputSchema: {
+          type: "object",
+          properties: {
+            name: { type: "string", description: "The unique name for the secret" }
+          },
+          required: ["name"]
         }
       },
       { 

@@ -22,7 +22,13 @@ export async function POST(request: Request) {
     const { name } = await request.json()
     if (!name) return Response.json({ error: 'Token name required' }, { status: 400 })
 
-    const token = `vtx_${crypto.randomBytes(32).toString('hex')}`
+    const host = request.headers.get('host') || 'localhost:3000'
+    const protocol = request.headers.get('x-forwarded-proto') || 'http'
+    const baseUrlEncoded = Buffer.from(`${protocol}://${host}`).toString('base64').replace(/=/g, '')
+    
+    const randomHash = crypto.randomBytes(24).toString('hex')
+    const token = `vtx_${baseUrlEncoded}_${randomHash}`
+
     const created = await prisma.mcpToken.create({
       data: { userId: session.id, name, token },
       select: { id: true, name: true, token: true, createdAt: true },

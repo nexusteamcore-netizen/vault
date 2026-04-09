@@ -36,8 +36,14 @@ export async function logAccess(params: {
   source?: string
 }) {
   try {
-    const ip = params.request?.headers.get('x-forwarded-for') ?? 'unknown'
+    const rawIp = params.request?.headers.get('x-forwarded-for') ?? 
+                 params.request?.headers.get('x-real-ip') ?? 
+                 'unknown'
+    
+    // Vercel might send a list of IPs, take the first one
+    const ip = rawIp.split(',')[0].trim()
     const ua = params.request?.headers.get('user-agent') ?? 'unknown'
+    
     await prisma.accessLog.create({
       data: {
         userId: params.userId,
@@ -48,7 +54,8 @@ export async function logAccess(params: {
         source: params.source ?? 'web',
       },
     })
-  } catch {
-    // non-critical
+  } catch (err: any) {
+    console.error(`[Audit Log Error] Failed to log action ${params.action} for user ${params.userId}:`, err.message)
+    // non-critical, but now we know why it fails in logs
   }
 }

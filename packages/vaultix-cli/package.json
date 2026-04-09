@@ -1,6 +1,6 @@
 {
   "name": "@nourmohamed/vaultix-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vaultix official CLI tool fetching secrets right from your terminal",
   "main": "bin/cli.js",
   "bin": {

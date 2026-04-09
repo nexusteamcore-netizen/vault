@@ -32,33 +32,65 @@ async function run() {
       console.error('\x1b[31m[Error]\x1b[0m Please provide your API key: vaultix login vtx_your_key');
       process.exit(1);
     }
-    saveConfig({ ...config, apiKey: key });
-    console.log('\x1b[32m[Success]\x1b[0m Authenticated successfully. Your key is saved locally.');
+
+    const newConfig = { ...config, apiKey: key };
+    
+    // Auto-detect URL from smart token vtx_BASE64URL_HASH
+    const parts = key.split('_');
+    if (parts.length === 3 && parts[0] === 'vtx') {
+      try {
+        const decodedUrl = Buffer.from(parts[1], 'base64').toString('utf8');
+        if (decodedUrl.startsWith('http')) {
+          newConfig.baseUrl = decodedUrl;
+          console.log(`\x1b[36m[Auto-Config]\x1b[0m Detected Platform URL: ${decodedUrl}`);
+        }
+      } catch (e) {
+        // Fallback to existing or default
+      }
+    }
+    
+    saveConfig(newConfig);
+    console.log('\x1b[32m[Success]\x1b[0m Authenticated successfully.');
+    process.exit(0);
+  }
+
+  if (command === 'config') {
+    const key = args[1];
+    const val = args[2];
+    if (!key || !val) {
+      console.log('\x1b[33mUsage:\x1b[0m vaultix config <key> <value>');
+      console.log('Available keys: baseUrl');
+      console.log(`Current Config: ${JSON.stringify(config, null, 2)}`);
+      process.exit(0);
+    }
+    config[key] = val;
+    saveConfig(config);
+    console.log(`\x1b[32m[Success]\x1b[0m Config ${key} updated.`);
     process.exit(0);
   }
 
   if (!command) {
     console.error(`
-\x1b[36mVaultix CLI Help\x1b[0m
-----------------
+\x1b[36m--- Vaultix CLI v1.0.2 ---\x1b[0m
 Steps to get started:
-1. \x1b[33mvaultix login <API_KEY>\x1b[0m  (Authenticates your machine)
-2. \x1b[33mvaultix list\x1b[0m            (Shows your secrets)
-3. \x1b[33mvaultix get <NAME>\x1b[0m      (Retrieves a secret)
+1. \x1b[33mvaultix login <API_KEY> [URL]\x1b[0m  (Authenticates your machine)
+2. \x1b[33mvaultix list\x1b[0m                  (Shows your secrets)
+3. \x1b[33mvaultix get <NAME>\x1b[0m            (Retrieves a secret)
 
-Full Commands:
-  vaultix login <KEY>
+Commands:
+  vaultix login <KEY> [URL]
   vaultix get <NAME>
   vaultix list
   vaultix set <NAME> <VALUE>
   vaultix delete <NAME>
+  vaultix config baseUrl <URL>
 `);
     process.exit(1);
   }
 
-  const { apiKey } = loadConfig();
+  const { apiKey, baseUrl: configUrl } = loadConfig();
   const token = process.env.VAULTIX_API_KEY || apiKey;
-  const baseUrl = process.env.VAULTIX_URL || 'http://localhost:3000';
+  const baseUrl = process.env.VAULTIX_URL || configUrl || 'http://localhost:3000';
 
   if (!token) {
     console.error(`\x1b[31m[Error]\x1b[0m No API key found.`);
