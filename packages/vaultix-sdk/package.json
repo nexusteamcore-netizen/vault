@@ -1,5 +1,5 @@
 {
-  "name": "@vaultix/sdk",
+  "name": "@nourmohamed/vaultix-sdk",
   "version": "1.0.0",
   "description": "Vaultix official Node.js SDK",
   "main": "dist/index.js",

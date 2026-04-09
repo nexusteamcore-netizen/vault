@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function SdkPage() {
   const [toast, setToast] = useState<{ msg: string; type: string } | null>(null)
-  const [isReady, setIsReady] = useState(false) // Toggle this to true to restore the UI
+  const [isReady, setIsReady] = useState(true) // Toggle this to true to restore the UI
 
   function showToast(msg: string, type = 'info') {
     setToast({ msg, type })
@@ -52,7 +52,7 @@ export default function SdkPage() {
           <p className="page-subtitle">Integrate Vaultix directly into your codebase.</p>
         </div>
         <Link href="/mcp" className="btn btn-primary">
-          <Zap size={14} /> GET_API_KEY
+          GET_API_KEY
         </Link>
       </div>
 
@@ -76,26 +76,29 @@ export default function SdkPage() {
                 <span className="badge badge-muted">v1.0.0</span>
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div style={{ fontSize: 13, color: 'var(--text-primary)', fontWeight: 600 }} className="mono">
-                  <span style={{ color: 'var(--accent)' }}>$</span> npm i -g @vaultix/cli
-                </div>
-                
-                <div style={{ 
-                  background: 'var(--bg-base)', 
-                  border: '1px solid var(--border)', 
-                  borderRadius: 'var(--radius-md)', 
-                  padding: '12px 14px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                  <div style={{ fontSize: 13 }} className="mono">
-                    <span style={{ color: 'var(--accent)' }}>$</span> vaultix get STRIPE_KEY
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 1: Install</div>
+                  <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span><span style={{ color: 'var(--accent)' }}>$</span> npm i -g @nourmohamed/vaultix-cli</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('npm i -g @nourmohamed/vaultix-cli')}><Copy size={12} /></button>
                   </div>
-                  <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('vaultix get STRIPE_KEY')}>
-                    <Copy size={14} />
-                  </button>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 2: Login</div>
+                  <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span><span style={{ color: 'var(--accent)' }}>$</span> vaultix login &lt;TOKEN&gt;</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('vaultix login')}><Copy size={12} /></button>
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 3: Retrieve</div>
+                  <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span><span style={{ color: 'var(--accent)' }}>$</span> vaultix get firebase</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('vaultix get firebase')}><Copy size={12} /></button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,7 +111,12 @@ export default function SdkPage() {
                 </div>
               </div>
               
-              <div style={{ position: 'relative' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div style={{ fontSize: 13, color: 'var(--text-primary)', fontWeight: 600 }} className="mono">
+                  <span style={{ color: 'var(--accent)' }}>$</span> npm i @nourmohamed/vaultix-sdk
+                </div>
+
+                <div style={{ position: 'relative' }}>
                 <pre style={{ 
                   background: 'var(--bg-base)', 
                   border: '1px solid var(--border)', 
@@ -118,25 +126,27 @@ export default function SdkPage() {
                   fontSize: 13,
                   lineHeight: 1.6
                 }} className="mono">
-  <span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@vaultix/sdk'</span>;{'\n\n'}
-  <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n'}
-  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"STRIPE_KEY"</span>);
+  <span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@nourmohamed/vaultix-sdk'</span>;{'\n\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n\n'}
+  <span style={{ color: '#8b949e' }}>// Read, Write, Delete</span>{'\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"STRIPE_KEY"</span>);{'\n'}
+  <span style={{ color: '#ff7b72' }}>await</span> vault.set(<span style={{ color: '#a5d6ff' }}>"NEW_KEY"</span>, <span style={{ color: '#a5d6ff' }}>"value"</span>);{'\n'}
+  <span style={{ color: '#ff7b72' }}>await</span> vault.delete(<span style={{ color: '#a5d6ff' }}>"OLD_KEY"</span>);
                 </pre>
                 <button 
                   className="btn btn-ghost btn-sm" 
                   style={{ position: 'absolute', top: 8, right: 8, padding: 4, height: 'auto', background: 'var(--bg-base)' }} 
-                  onClick={() => copy(`import { Vaultix } from '@vaultix/sdk';\n\nconst vault = new Vaultix();\nconst key = await vault.get("STRIPE_KEY");`)}
+                  onClick={() => copy(`import { Vaultix } from '@nourmohamed/vaultix-sdk';\n\nconst vault = new Vaultix();\n\n// Read, Write, Delete\nconst key = await vault.get("STRIPE_KEY");\nawait vault.set("NEW_KEY", "value");\nawait vault.delete("OLD_KEY");`)}
                 >
                   <Copy size={14} />
                 </button>
               </div>
             </div>
-            
           </div>
         </div>
 
         {/* REST API & Instructions section */}
-        <div className="card fade-up" style={{ animationDelay: '0.1s' }}>
+        <div className="card fade-up" style={{ animationDelay: '0.1s', marginTop: 24 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
             <LinkIcon size={16} /> Using the REST API
           </h2>
@@ -163,8 +173,8 @@ export default function SdkPage() {
             </pre>
           </div>
         </div>
-
       </div>
-    </>
+    </div>
+  </>
   )
 }

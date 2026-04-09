@@ -118,7 +118,7 @@ export default function LandingPage() {
       {/* Pricing */}
       <section className="pricing-section" id="pricing">
         <div className="section-tag">
-          <span className="badge badge-green">Pricing</span>
+          <span className="badge badge-accent">Pricing</span>
         </div>
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-sub">Start free. Upgrade when you're ready.</p>

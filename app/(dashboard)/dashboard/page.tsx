@@ -6,7 +6,7 @@ interface Stats { secrets: number; logs: number; tokens: number }
 interface Log { id: string; action: string; source: string; createdAt: string; secret?: { name: string; service: string } | null; ipAddress?: string }
 
 import { SecretIcon } from '@/lib/branding'
-import { PlusCircle, Eye, Pencil, Trash2, Cpu, KeyRound, Activity, ShieldCheck, Mailbox, Globe } from 'lucide-react'
+import { PlusCircle, Eye, Pencil, Trash2, Cpu, KeyRound, Activity, ShieldCheck, Mailbox, Globe, Terminal, Code2, Copy } from 'lucide-react'
 
 const ACTION_COLORS: Record<string, string> = {
   create: 'badge-green', read: 'badge-accent', update: 'badge-amber',
@@ -83,71 +83,101 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* Activity */}
-        <div className="card fade-up" style={{ animationDelay: '0.1s' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 600 }}>Recent Activity</h2>
-            <Link href="/logs" className="btn btn-ghost btn-sm">View all →</Link>
-          </div>
-          {loading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
-              <div className="spinner" style={{ width: 28, height: 28 }} />
+        {/* Main Split Content */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+
+          {/* Simple SDK Card (Left) */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'linear-gradient(180deg, rgba(20, 20, 20, 0.4) 0%, rgba(10, 10, 10, 0.4) 100%)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.05)'
+          }} className="card fade-up">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 15, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 10, color: 'var(--text-primary)' }}>
+                <Terminal size={18} style={{ color: 'var(--accent)', opacity: 0.9 }} /> Developer Toolkit
+              </h2>
+              <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--accent)', background: 'rgba(0, 250, 154, 0.05)', padding: '2px 8px', borderRadius: 4, border: '1px solid rgba(0, 250, 154, 0.1)' }}>v1.0.1</span>
             </div>
-          ) : logs.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-muted)' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
-                <Mailbox size={36} strokeWidth={1} color="var(--text-muted)" />
-              </div>
-              <p>No activity yet. <Link href="/vault" style={{ color: 'var(--accent)' }}>Add your first secret →</Link></p>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {logs.slice(0, 5).map((log, index, arr) => (
-                <div key={log.id} style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '16px', borderBottom: index === arr.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.04)'
+
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 20, lineHeight: 1.5 }}>
+              The secure gateway to your secrets from any environment.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
+              {[
+                'npm i -g @nourmohamed/vaultix-cli',
+                'vaultix login <TOKEN>',
+                'vaultix get firebase'
+              ].map((cmd, i) => (
+                <div key={i} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  background: 'rgba(255,255,255,0.02)',
+                  padding: '10px 12px',
+                  borderRadius: 8,
+                  border: '1px solid rgba(255,255,255,0.03)'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <div style={{
-                      width: 36, height: 36, borderRadius: '50%',
-                      background: log.source === 'mcp' ? 'rgba(0, 255, 255, 0.08)' : 'rgba(0, 255, 0, 0.08)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: log.source === 'mcp' ? 'var(--cyan)' : 'var(--accent)'
-                    }}>
-                      {log.source === 'mcp' ? <Cpu size={16} /> : <Globe size={16} />}
-                    </div>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-                          {ACTION_LABELS[log.action] || log.action}
-                        </span>
-                        <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>on</span>
-                        {log.secret ? (
-                          <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)' }}>{log.secret.name}</span>
-                        ) : (
-                          <span className="badge badge-muted" style={{ fontSize: 10, padding: '2px 6px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                            System Profile
-                          </span>
-                        )}
-                      </div>
-                      <div style={{ fontSize: 12, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ color: log.source === 'mcp' ? 'var(--cyan)' : 'var(--text-muted)', opacity: log.source === 'mcp' ? 0.8 : 1 }}>
-                          {log.source === 'mcp' ? 'AI Plugin' : 'Web Console'}
-                        </span>
-                        <span>·</span>
-                        <span className="mono" style={{ opacity: 0.7 }}>
-                          {log.ipAddress === '::1' || log.ipAddress === '127.0.0.1' ? 'Local System' : log.ipAddress}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mono" style={{ fontSize: 12, color: 'var(--text-muted)', opacity: 0.7 }}>
-                    {timeAgo(log.createdAt)}
+                  <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-primary)', width: 14, opacity: 0.8 }}>{i + 1}</div>
+                  <div className="mono" style={{ fontSize: 12.5, color: '#bcc4d0', letterSpacing: '-0.2px' }}>
+                    <span style={{ color: 'var(--accent)', marginRight: 6 }}>$</span>{cmd}
                   </div>
                 </div>
               ))}
             </div>
-          )}
+          </div>
+
+          {/* Activity (Right) */}
+          <div className="card fade-up" style={{ animationDelay: '0.15s', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 16, fontWeight: 600 }}>Recent Activity</h2>
+              <Link href="/logs" className="btn btn-ghost btn-sm">View all →</Link>
+            </div>
+            {loading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
+                <div className="spinner" style={{ width: 24, height: 24 }} />
+              </div>
+            ) : logs.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--text-muted)' }}>
+                <p>No activity yet.</p>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                {logs.slice(0, 3).map((log, index, arr) => (
+                  <div key={log.id} style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '12px 0', borderBottom: index === arr.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.04)'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <div style={{
+                        width: 32, height: 32, borderRadius: '50%',
+                        background: log.source === 'mcp' ? 'rgba(0, 255, 255, 0.08)' : 'rgba(0, 255, 0, 0.08)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: log.source === 'mcp' ? 'var(--cyan)' : 'var(--accent)'
+                      }}>
+                        {log.source === 'mcp' ? <Cpu size={14} /> : <Globe size={14} />}
+                      </div>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
+                            {ACTION_LABELS[log.action] || log.action}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+                          {log.secret?.name || 'System'} · {log.source === 'mcp' ? 'AI' : 'Web'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mono" style={{ fontSize: 11, color: 'var(--text-muted)' }}>
+                      {timeAgo(log.createdAt)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Quick actions */}
