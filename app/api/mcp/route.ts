@@ -1,3 +1,7 @@
+import { requireApiToken } from '@/lib/auth'
+import { encrypt, decrypt } from '@/lib/crypto'
+import { prisma } from '@/lib/db'
+import { PROXY_PROVIDERS } from '@/lib/proxy-providers'
 import { scrubSecrets } from '@/lib/security'
 
 export async function POST(request: Request) {
