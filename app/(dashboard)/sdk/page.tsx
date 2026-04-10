@@ -126,17 +126,17 @@ export default function SdkPage() {
                   fontSize: 13,
                   lineHeight: 1.6
                 }} className="mono">
+  <span style={{ color: '#8b949e' }}>// 1. Put this in your .env</span>{'\n'}
+  <span style={{ color: '#a5d6ff' }}>VAULTIX_API_KEY</span>=vtx_...{'\n\n'}
+  <span style={{ color: '#8b949e' }}>// 2. Use it anywhere in your code</span>{'\n'}
   <span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@nourmohamed/vaultix-sdk'</span>;{'\n\n'}
-  <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n\n'}
-  <span style={{ color: '#8b949e' }}>// Read, Write, Delete</span>{'\n'}
-  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"STRIPE_KEY"</span>);{'\n'}
-  <span style={{ color: '#ff7b72' }}>await</span> vault.set(<span style={{ color: '#a5d6ff' }}>"NEW_KEY"</span>, <span style={{ color: '#a5d6ff' }}>"value"</span>);{'\n'}
-  <span style={{ color: '#ff7b72' }}>await</span> vault.delete(<span style={{ color: '#a5d6ff' }}>"OLD_KEY"</span>);
+  <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"openai_service"</span>);
                 </pre>
                 <button 
                   className="btn btn-ghost btn-sm" 
                   style={{ position: 'absolute', top: 8, right: 8, padding: 4, height: 'auto', background: 'var(--bg-base)' }} 
-                  onClick={() => copy(`import { Vaultix } from '@nourmohamed/vaultix-sdk';\n\nconst vault = new Vaultix();\n\n// Read, Write, Delete\nconst key = await vault.get("STRIPE_KEY");\nawait vault.set("NEW_KEY", "value");\nawait vault.delete("OLD_KEY");`)}
+                  onClick={() => copy(`import { Vaultix } from '@nourmohamed/vaultix-sdk';\n\nconst vault = new Vaultix();\nconst key = await vault.get("openai_service");`)}
                 >
                   <Copy size={14} />
                 </button>

@@ -7,7 +7,21 @@ class Vaultix {
     constructor(options) {
         // Attempt to load from env if not explicitly provided
         this.apiKey = options?.apiKey || process.env.VAULTIX_API_KEY || '';
-        this.baseUrl = options?.baseUrl || process.env.VAULTIX_URL || 'http://localhost:3000';
+        // Auto-detect base URL from smart token if available
+        let smartUrl = '';
+        if (this.apiKey && this.apiKey.startsWith('vtx_')) {
+            const parts = this.apiKey.split('_');
+            if (parts.length === 3) {
+                try {
+                    const decoded = Buffer.from(parts[1], 'base64').toString('utf8');
+                    if (decoded.startsWith('http')) {
+                        smartUrl = decoded;
+                    }
+                }
+                catch (e) { }
+            }
+        }
+        this.baseUrl = options?.baseUrl || process.env.VAULTIX_URL || smartUrl || 'http://localhost:3000';
         if (!this.apiKey) {
             throw new Error('Vaultix SDK requires an API key. Pass it in options or set VAULTIX_API_KEY in your environment.');
         }

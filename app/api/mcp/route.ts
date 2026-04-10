@@ -29,20 +29,6 @@ export async function POST(request: Request) {
       return Response.json({ result: secrets })
     }
 
-    if (tool === 'get_secret') {
-      const { name } = params || {}
-      if (!name) return Response.json({ error: 'params.name required' }, { status: 400 })
-      
-      const secret = await prisma.secret.findFirst({ where: { userId: user.id, name } })
-      if (!secret) return Response.json({ error: `Secret "${name}" not found` }, { status: 404 })
-
-      activeSecretValue = decrypt(secret.encryptedValue, secret.iv, secret.tag)
-      await prisma.secret.update({ where: { id: secret.id }, data: { lastAccessed: new Date() } })
-      await prisma.accessLog.create({
-        data: { userId: user.id, secretId: secret.id, action: 'mcp_read', source: 'mcp', ipAddress: ip },
-      })
-      return Response.json({ result: { name: secret.name, value: activeSecretValue, service: secret.service } })
-    }
 
     if (tool === 'set_secret') {
       const { name, value, service, description } = params || {}
@@ -135,14 +121,17 @@ export async function GET() {
         }
       },
       { 
-        name: 'get_secret', 
-        description: 'Retrieve a decrypted secret by name', 
+        name: 'execute_proxy', 
+        description: 'Execute a secure request to an external provider using a vaulted secret. The secret never leaves the vault.', 
         inputSchema: {
           type: "object",
           properties: {
-            name: { type: "string", description: "The unique name for the secret" }
+            secretName: { type: "string", description: "Name of the secret to use" },
+            provider: { type: "string", description: "Provider name (e.g., openai, stripe, github)" },
+            endpoint: { type: "string", description: "Endpoint name (e.g., chat.completions, customers.list, repos.list)" },
+            payload: { type: "object", description: "Optional JSON payload for POST/PUT requests" }
           },
-          required: ["name"]
+          required: ["secretName", "provider", "endpoint"]
         }
       },
       { 
@@ -157,20 +146,6 @@ export async function GET() {
             description: { type: "string", description: "Optional description of the secret" }
           },
           required: ["name", "value"]
-        }
-      },
-      { 
-        name: 'execute_proxy', 
-        description: 'Execute a secure request to an external provider using a vaulted secret. The secret never leaves the vault.', 
-        inputSchema: {
-          type: "object",
-          properties: {
-            secretName: { type: "string", description: "Name of the secret to use" },
-            provider: { type: "string", description: "Provider name (e.g., openai, stripe, github)" },
-            endpoint: { type: "string", description: "Endpoint name (e.g., chat.completions, customers.list, repos.list)" },
-            payload: { type: "object", description: "Optional JSON payload for POST/PUT requests" }
-          },
-          required: ["secretName", "provider", "endpoint"]
         }
       },
     ],

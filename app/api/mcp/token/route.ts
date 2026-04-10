@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const protocol = request.headers.get('x-forwarded-proto') || 'http'
     const baseUrlEncoded = Buffer.from(`${protocol}://${host}`).toString('base64').replace(/=/g, '')
     
-    const randomHash = crypto.randomBytes(24).toString('hex')
+    const randomHash = crypto.randomBytes(16).toString('hex')
     const token = `vtx_${baseUrlEncoded}_${randomHash}`
 
     const created = await prisma.mcpToken.create({

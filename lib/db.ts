@@ -15,6 +15,9 @@ function getPrismaClient() {
   if (!globalForPrisma.prisma) {
     const pool = new Pool({ 
       connectionString: process.env.DATABASE_URL,
+      max: process.env.NODE_ENV === 'production' ? 2 : 10,
+      idleTimeoutMillis: 10000,
+      connectionTimeoutMillis: 10000,
       ssl: {
         rejectUnauthorized: false
       }
