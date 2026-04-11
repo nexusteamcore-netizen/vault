@@ -168,8 +168,8 @@ export default function DashboardPage() {
                             {ACTION_LABELS[log.action] || log.action}
                           </span>
                         </div>
-                        <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                          {log.secret?.name || 'System'} · {log.source === 'mcp' ? 'AI' : 'Web'}
+                        <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>
+                          {log.secret?.name || (log.action === 'copy' && log.source === 'web_mcp' ? 'MCP Access Key' : 'System')} · {log.source === 'web_mcp' ? 'MCP' : (log.source === 'mcp' ? 'AI' : 'Web')}
                         </div>
                       </div>
                     </div>
