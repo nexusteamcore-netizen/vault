@@ -18,7 +18,8 @@ const ACTION_LABELS: Record<string, string> = {
   create: 'Created', read: 'Viewed', update: 'Updated', delete: 'Deleted',
   mcp_read: 'MCP Read', mcp_list: 'MCP List', mcp_write: 'MCP Write',
   create_token: 'Token Gen', delete_token: 'Token Revoked',
-  'mcp_proxy_openai_chat.completions': 'AI Request'
+  'mcp_proxy_openai_chat.completions': 'AI Request',
+  copy: 'Copied'
 }
 
 export default function LogsPage() {

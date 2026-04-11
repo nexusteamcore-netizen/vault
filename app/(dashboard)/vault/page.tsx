@@ -132,9 +132,20 @@ export default function VaultPage() {
     }
   }
 
-  function copyToClipboard(v: string) {
+  async function copyToClipboard(v: string, secretId?: string) {
     navigator.clipboard.writeText(v)
     showToast('Copied to clipboard!', 'success')
+    if (secretId) {
+      try {
+        await fetch('/api/logs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'copy', secretId }),
+        })
+      } catch (err) {
+        console.error('Logging failed:', err)
+      }
+    }
   }
 
   const filtered = secrets.filter(s =>
@@ -342,7 +353,7 @@ export default function VaultPage() {
                     <button className="btn btn-ghost btn-sm" onClick={() => setRevealed(r => !r)} style={{ padding: '0 12px', height: 36, flexShrink: 0 }}>
                       {revealed ? <><EyeOff size={14} style={{ marginRight: 6 }} />Hide</> : <><Eye size={14} style={{ marginRight: 6 }} />Reveal</>}
                     </button>
-                    <button className="btn btn-secondary btn-sm" onClick={() => copyToClipboard(detail.value)} style={{ padding: '0 12px', height: 36, flexShrink: 0 }}>
+                    <button className="btn btn-secondary btn-sm" onClick={() => copyToClipboard(detail.value, detail.id)} style={{ padding: '0 12px', height: 36, flexShrink: 0 }}>
                       <Copy size={14} style={{ marginRight: 6 }} />Copy
                     </button>
                   </div>

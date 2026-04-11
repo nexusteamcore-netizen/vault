@@ -66,9 +66,20 @@ export default function McpPage() {
     }
   }
 
-  function copy(text: string) {
+  async function copy(text: string, isToken = false) {
     navigator.clipboard.writeText(text)
     showToast('Copied!', 'success')
+    if (isToken) {
+      try {
+        await fetch('/api/logs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'copy', source: 'web_mcp' }),
+        })
+      } catch (err) {
+        console.error('Logging failed:', err)
+      }
+    }
   }
 
   const claudeConfig = (token: string) => JSON.stringify({
@@ -191,7 +202,7 @@ export default function McpPage() {
                     <button className="btn btn-ghost btn-sm" onClick={() => setRevealedTokens(prev => { const n = new Set(prev); prev.has(tok.id) ? n.delete(tok.id) : n.add(tok.id); return n })}>
                       {revealedTokens.has(tok.id) ? <EyeOff size={14} /> : <Eye size={14} />}
                     </button>
-                    <button className="btn btn-secondary btn-sm mono" onClick={() => copy(tok.token)}><Copy size={14} style={{ marginRight: 6 }} /> COPY</button>
+                    <button className="btn btn-secondary btn-sm mono" onClick={() => copy(tok.token, true)}><Copy size={14} style={{ marginRight: 6 }} /> COPY</button>
                   </div>
 
                   {/* Claude config */}
@@ -202,7 +213,7 @@ export default function McpPage() {
                         <pre className="mono" style={{ fontSize: 11, lineHeight: 1.7, background: 'var(--bg-base)', padding: 16, borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', color: 'var(--cyan)', overflow: 'auto' }}>
                           {claudeConfig(tok.token)}
                         </pre>
-                        <button className="btn btn-ghost btn-sm" style={{ position: 'absolute', top: 8, right: 8 }} onClick={() => copy(claudeConfig(tok.token))}><Copy size={14} /></button>
+                        <button className="btn btn-ghost btn-sm" style={{ position: 'absolute', top: 8, right: 8 }} onClick={() => copy(claudeConfig(tok.token), true)}><Copy size={14} /></button>
                       </div>
                     </div>
                   )}

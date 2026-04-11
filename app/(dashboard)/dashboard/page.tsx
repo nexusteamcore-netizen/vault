@@ -17,7 +17,8 @@ const ACTION_LABELS: Record<string, string> = {
   create: 'Created API Key', read: 'Viewed Secret', update: 'Updated Key', delete: 'Deleted Secret',
   mcp_read: 'MCP Data Read', mcp_list: 'MCP Network Sync', mcp_write: 'MCP Data Write',
   create_token: 'Generated Token', delete_token: 'Revoked Token',
-  'mcp_proxy_openai_chat.completions': 'AI Request'
+  'mcp_proxy_openai_chat.completions': 'AI Request',
+  copy: 'Copied'
 }
 
 const ACTION_ICONS: Record<string, React.ReactNode> = {
