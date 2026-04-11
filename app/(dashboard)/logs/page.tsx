@@ -83,8 +83,18 @@ export default function LogsPage() {
                       </td>
                       <td style={{ padding: '20px 24px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                          <div style={{ width: 28, height: 28, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)' }}>
-                             <span style={{ fontSize: 14, fontWeight: 700 }}>{'>_'}</span>
+                          <div style={{ 
+                            width: 26, 
+                            height: 26, 
+                            background: 'rgba(0, 255, 65, 0.02)', 
+                            border: '1px solid rgba(0, 255, 65, 0.15)', 
+                            borderRadius: 6, 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center', 
+                            color: '#fff'
+                          }}>
+                             <span style={{ fontSize: 11, fontWeight: 600, fontFamily: 'var(--font-mono)' }}>{'>_'}</span>
                           </div>
                           <span style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: 14 }}>
                             {log.secret?.name || (log.action === 'copy' && log.source === 'web_mcp' ? 'MCP Access Key' : 'System Core')}
