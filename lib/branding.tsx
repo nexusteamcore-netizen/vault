@@ -66,7 +66,7 @@ interface GetSecretIconProps {
 }
 
 export function SecretIcon({ name, categoryId, size = 20 }: GetSecretIconProps) {
-  const normalized = name.toLowerCase().trim()
+  const normalized = name.toLowerCase().trim().replace(/[\s\-_]/g, '')
   
   // 1. Check Signatures First
   const signatureMatch = Object.keys(SIGNATURE_MAP).find(sig => normalized.startsWith(sig))
