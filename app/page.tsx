@@ -105,7 +105,7 @@ export default function LandingPage() {
       "command": "npx",
       "args": ["-y", "https://your-domain.com/vaultix-mcp.tgz?v=2"],
       "env": {
-        "VAULTIX_TOKEN": "vtx_••••••••",
+        "VAULTIX_TOKEN": "vtx_your_access_token",
         "VAULTIX_URL": "https://your-domain.com/api/mcp"
       }
     }

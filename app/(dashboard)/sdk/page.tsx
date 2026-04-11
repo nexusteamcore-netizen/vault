@@ -127,7 +127,7 @@ export default function SdkPage() {
                   lineHeight: 1.6
                 }} className="mono">
   <span style={{ color: '#8b949e' }}>// 1. Put this in your .env</span>{'\n'}
-  <span style={{ color: '#a5d6ff' }}>VAULTIX_API_KEY</span>=vtx_...{'\n\n'}
+  <span style={{ color: '#a5d6ff' }}>VAULTIX_API_KEY</span>=your_access_token{'\n\n'}
   <span style={{ color: '#8b949e' }}>// 2. Use it anywhere in your code</span>{'\n'}
   <span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@nourmohamed/vaultix-sdk'</span>;{'\n\n'}
   <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n'}
@@ -166,7 +166,7 @@ export default function SdkPage() {
             }} className="mono">
   <span style={{ color: '#ff7b72' }}>const</span> response = <span style={{ color: '#ff7b72' }}>await</span> fetch(<span style={{ color: '#a5d6ff' }}>'https://yourapp.net/api/v1/secrets/STRIPE_KEY'</span>, {'{\n'}
     headers: {'{\n'}
-      <span style={{ color: '#79c0ff' }}>'Authorization'</span>: <span style={{ color: '#a5d6ff' }}>'Bearer vtx_your_api_key_here'</span>{'\n'}
+      <span style={{ color: '#79c0ff' }}>'Authorization'</span>: <span style={{ color: '#a5d6ff' }}>'Bearer your_api_key_here'</span>{'\n'}
     {'}\n'}
   {'}'});{'\n'}
   <span style={{ color: '#ff7b72' }}>const</span> {'{ name, value }'} = <span style={{ color: '#ff7b72' }}>await</span> response.json();

@@ -16,7 +16,8 @@ const ACTION_COLORS: Record<string, string> = {
 const ACTION_LABELS: Record<string, string> = {
   create: 'Created API Key', read: 'Viewed Secret', update: 'Updated Key', delete: 'Deleted Secret',
   mcp_read: 'MCP Data Read', mcp_list: 'MCP Network Sync', mcp_write: 'MCP Data Write',
-  create_token: 'Generated Token', delete_token: 'Revoked Token'
+  create_token: 'Generated Token', delete_token: 'Revoked Token',
+  'mcp_proxy_openai_chat.completions': 'AI Request'
 }
 
 const ACTION_ICONS: Record<string, React.ReactNode> = {
@@ -105,7 +106,7 @@ export default function DashboardPage() {
               The secure gateway to your secrets from any environment.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 0 }}>
               {[
                 'npm i -g @nourmohamed/vaultix-cli',
                 'vaultix login <TOKEN>',
@@ -152,12 +153,13 @@ export default function DashboardPage() {
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                       <div style={{
-                        width: 32, height: 32, borderRadius: '50%',
-                        background: log.source === 'mcp' ? 'rgba(0, 255, 255, 0.08)' : 'rgba(0, 255, 0, 0.08)',
+                        width: 32, height: 32, borderRadius: 8,
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: log.source === 'mcp' ? 'var(--cyan)' : 'var(--accent)'
+                        color: 'var(--accent)', flexShrink: 0
                       }}>
-                        {log.source === 'mcp' ? <Cpu size={14} /> : <Globe size={14} />}
+                        <span style={{ fontSize: 13, fontWeight: 800 }}>{'>_'}</span>
                       </div>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>

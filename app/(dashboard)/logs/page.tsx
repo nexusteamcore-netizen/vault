@@ -17,7 +17,8 @@ const ACTION_COLORS: Record<string, string> = {
 const ACTION_LABELS: Record<string, string> = {
   create: 'Created', read: 'Viewed', update: 'Updated', delete: 'Deleted',
   mcp_read: 'MCP Read', mcp_list: 'MCP List', mcp_write: 'MCP Write',
-  create_token: 'Token Gen', delete_token: 'Token Revoked'
+  create_token: 'Token Gen', delete_token: 'Token Revoked',
+  'mcp_proxy_openai_chat.completions': 'AI Request'
 }
 
 export default function LogsPage() {
@@ -58,51 +59,49 @@ export default function LogsPage() {
               border: 'none',
               overflow: 'hidden'
             }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', tableLayout: 'fixed' }}>
                 <thead>
                   <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--border-color)' }}>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', fontWeight: 600 }}>Action</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', fontWeight: 600 }}>Target</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', fontWeight: 600 }}>Source Client</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', fontWeight: 600 }}>IP Origin</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', fontWeight: 600, textAlign: 'right' }}>Date & Time</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Action</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Target Identity</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Source Client</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Ip Origin</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Date & Time</th>
                   </tr>
                 </thead>
                 <tbody>
                   {logs.map((log, index) => (
                     <tr key={log.id} style={{ borderBottom: index === logs.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.04)' }}>
-                      <td style={{ padding: '16px 24px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          {log.source === 'mcp' ? <Bot size={14} color="var(--cyan)" /> : <Globe size={14} color="var(--text-muted)" />}
-                          <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)' }}>
+                      <td style={{ padding: '20px 24px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                          <Globe size={16} className="text-muted" style={{ opacity: 0.6 }} />
+                          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>
                             {ACTION_LABELS[log.action] || log.action}
                           </span>
                         </div>
                       </td>
-                      <td style={{ padding: '16px 24px' }}>
-                        {log.secret ? (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <SecretIcon name={log.secret.name} categoryId={log.secret.service} size={16} />
-                            <span style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: 13, letterSpacing: '-0.01em' }}>{log.secret.name}</span>
+                      <td style={{ padding: '20px 24px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                          <div style={{ width: 28, height: 28, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)' }}>
+                             <span style={{ fontSize: 14, fontWeight: 700 }}>{'>_'}</span>
                           </div>
-                        ) : (
-                          <span className="badge badge-muted" style={{ padding: '2px 8px', fontSize: 11, opacity: 0.7, border: '1px solid rgba(255,255,255,0.1)' }}>
-                            System Profile
-                          </span>
-                        )}
+                          <span style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: 14 }}>{log.secret?.name || 'System Core'}</span>
+                        </div>
                       </td>
-                      <td style={{ padding: '16px 24px' }}>
-                        <span className={`badge ${log.source === 'mcp' ? 'badge-cyan' : 'badge-muted'}`} style={{ fontSize: 11 }}>
-                          {log.source === 'mcp' ? 'AI / MCP Plugin' : 'Web Console'}
-                        </span>
+                      <td style={{ padding: '20px 24px' }}>
+                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '6px 14px', borderRadius: 20, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                           <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+                             {log.source === 'mcp' ? 'MCP CONSOLE' : 'WEB CONSOLE'}
+                           </span>
+                        </div>
                       </td>
-                      <td style={{ padding: '16px 24px' }}>
-                        <span className="mono" style={{ fontSize: 12, color: 'var(--text-muted)', opacity: 0.8 }}>
-                          {log.ipAddress === '::1' || log.ipAddress === '127.0.0.1' ? 'Local System' : (log.ipAddress || '—')}
-                        </span>
+                      <td style={{ padding: '20px 24px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                           <span style={{ fontSize: 13, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>Local System</span>
+                        </div>
                       </td>
-                      <td style={{ padding: '16px 24px', fontSize: 12, color: 'var(--text-muted)', textAlign: 'right' }}>
-                        {new Date(log.createdAt).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}
+                      <td style={{ padding: '20px 24px', fontSize: 13, color: 'var(--text-muted)' }}>
+                        {new Date(log.createdAt).toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                       </td>
                     </tr>
                   ))}
