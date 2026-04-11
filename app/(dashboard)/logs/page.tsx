@@ -96,7 +96,7 @@ export default function LogsPage() {
                           }}>
                              <span style={{ fontSize: 11, fontWeight: 600, fontFamily: 'var(--font-mono)' }}>{'>_'}</span>
                           </div>
-                          <span style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: 14 }}>
+                          <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: 14 }}>
                             {log.secret?.name || (log.action === 'copy' && log.source === 'web_mcp' ? 'MCP Access Key' : 'System Core')}
                           </span>
                         </div>
