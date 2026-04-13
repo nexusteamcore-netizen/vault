@@ -108,9 +108,9 @@ export async function POST(request: Request) {
 
 export async function GET() {
   return Response.json({
-    name: 'vaultix-mcp',
+    name: 'phantomapi-mcp',
     version: '1.0.0',
-    description: 'Vaultix MCP server — manage API keys from your AI agent',
+    description: 'PhantomAPI MCP server — manage API keys from your AI agent',
     tools: [
       { 
         name: 'list_secrets', 

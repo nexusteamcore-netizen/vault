@@ -307,7 +307,7 @@ export default function VaultPage() {
           <div className="vault-detail">
             {!selected ? (
               <div className="vault-empty">
-                <div className="vault-empty-icon pulse-green" style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
+                <div className="vault-empty-icon pulse-cyan" style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
                   <LockKeyhole size={64} strokeWidth={1} color="var(--accent)" style={{ opacity: 0.2 }} />
                 </div>
                 <p style={{ fontSize: 16, fontWeight: 600 }} className="decipher">Workspace Locked</p>
@@ -363,7 +363,7 @@ export default function VaultPage() {
                 <div className="card" style={{ marginBottom: 20, padding: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                     <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Security Identity</div>
-                    <div className="badge badge-green" style={{ fontSize: 9, padding: '2px 8px', border: '1px solid rgba(0,255,65,0.2)', letterSpacing: '0.02em' }}>
+                    <div className="badge badge-cyan" style={{ fontSize: 9, padding: '2px 8px', border: '1px solid rgba(0, 229, 255,0.2)', letterSpacing: '0.02em' }}>
                       <ShieldCheck size={10} style={{ marginRight: 4 }} /> AES-256 SECURED
                     </div>
                   </div>

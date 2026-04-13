@@ -1,33 +1,36 @@
-import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { Pool } from 'pg'
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-
 const globalForPrisma = globalThis as unknown as { 
   prisma?: PrismaClient,
-  pool?: Pool,
-  adapter?: PrismaPg
 }
 
-function getPrismaClient() {
-  if (!globalForPrisma.prisma) {
+export function getPrisma() {
+  if (globalForPrisma.prisma) return globalForPrisma.prisma
+
+  try {
+    const connectionString = process.env.DATABASE_URL
+    if (!connectionString) {
+      console.warn('[DB] DATABASE_URL missing, falling back to standard client')
+      return new PrismaClient()
+    }
+
     const pool = new Pool({ 
-      connectionString: process.env.DATABASE_URL,
-      max: process.env.NODE_ENV === 'production' ? 2 : 10,
-      idleTimeoutMillis: 10000,
-      connectionTimeoutMillis: 10000,
-      ssl: {
-        rejectUnauthorized: false
-      }
+      connectionString,
+      ssl: { rejectUnauthorized: false }
     })
+
     const adapter = new PrismaPg(pool)
-    globalForPrisma.pool = pool
-    globalForPrisma.adapter = adapter
-    globalForPrisma.prisma = new PrismaClient({ adapter })
+    const client = new PrismaClient({ adapter })
+    
+    globalForPrisma.prisma = client
+    return client
+  } catch (err) {
+    console.error('[DB] Initialization error:', err)
+    return new PrismaClient()
   }
-  return globalForPrisma.prisma
 }
 
-export const prisma = getPrismaClient()
+// Keep the export but make it a getter or just use the function in routes
+export const prisma = getPrisma()

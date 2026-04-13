@@ -3,7 +3,7 @@
 import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET!
-export const COOKIE_NAME = 'vaultix_session'
+export const COOKIE_NAME = 'phantomapi_session'
 
 export interface SessionUser {
   id: string

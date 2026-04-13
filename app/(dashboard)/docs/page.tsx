@@ -25,12 +25,12 @@ export default function DocsPage() {
             <div style={{ position: 'absolute', top: -20, right: -20, width: 100, height: 100, background: 'var(--cyan)', filter: 'blur(80px)', opacity: 0.15 }} />
             <Cpu size={28} color="var(--cyan)" style={{ marginBottom: 16 }} />
             <h3 style={{ fontSize: 17, fontWeight: 600, marginBottom: 8 }}>MCP Integration</h3>
-            <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 16 }}>Connect Claude Desktop and Cursor to Vaultix. Let your custom AI agents inject secrets autonomously.</p>
+            <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 16 }}>Connect Claude Desktop and Cursor to PhantomAPI. Let your custom AI agents inject secrets autonomously.</p>
           </div>
 
           <div className="card fade-up" style={{ padding: 24, animationDelay: '0.2s', background: 'linear-gradient(145deg, var(--bg-elevated) 0%, rgba(20,20,20,1) 100%)', border: '1px solid rgba(255,255,255,0.05)', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: -20, right: -20, width: 100, height: 100, background: 'var(--green)', filter: 'blur(80px)', opacity: 0.15 }} />
-            <Shield size={28} color="var(--green)" style={{ marginBottom: 16 }} />
+            <div style={{ position: 'absolute', top: -20, right: -20, width: 100, height: 100, background: 'var(--accent)', filter: 'blur(80px)', opacity: 0.15 }} />
+            <Shield size={28} color="var(--accent)" style={{ marginBottom: 16 }} />
             <h3 style={{ fontSize: 17, fontWeight: 600, marginBottom: 8 }}>Audit & Compliance</h3>
             <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 16 }}>Track every access event, modification, and IP request in the immutable backend ledger for full visibility.</p>
           </div>
@@ -57,7 +57,7 @@ export default function DocsPage() {
               </p>
               <ul style={{ color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: 10, listStyleType: 'disc', paddingLeft: 20 }}>
                 <li><strong style={{ color: 'var(--text-primary)' }}>Identifiers:</strong> Use descriptive identifiers (e.g., OPENAI_API_KEY) for easy retrieval by AI agents. This exact identifier must be used by the agent to fetch it.</li>
-                <li><strong style={{ color: 'var(--text-primary)' }}>Taxonomy:</strong> Select the matching category. Vaultix automatically maps popular services to their native icons based on substrings (e.g. typing "stripe" maps to the Finance category icon automatically).</li>
+                <li><strong style={{ color: 'var(--text-primary)' }}>Taxonomy:</strong> Select the matching category. PhantomAPI automatically maps popular services to their native icons based on substrings (e.g. typing "stripe" maps to the Finance category icon automatically).</li>
                 <li><strong style={{ color: 'var(--text-primary)' }}>Visibility:</strong> Passwords are never visible by default to prevent shoulder surfing. You must explicitly reveal them in the details pane.</li>
               </ul>
             </div>
@@ -69,7 +69,7 @@ export default function DocsPage() {
                 <h3 style={{ fontSize: 17, fontWeight: 600 }}>2. AI Agent Integration (MCP)</h3>
               </div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 16 }}>
-                Vaultix acts as an MCP (Model Context Protocol) Server. AI IDEs (like Cursor) and Assistants (like Claude Desktop) can securely request environment variables directly from your Vault without storing them locally on your machine.
+                PhantomAPI acts as an MCP (Model Context Protocol) Server. AI IDEs (like Cursor) and Assistants (like Claude Desktop) can securely request environment variables directly from your Vault without storing them locally on your machine.
               </p>
               <div style={{ background: '#0a0a0a', padding: '20px 24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', marginBottom: 16 }}>
                 <strong style={{ fontSize: 14, display: 'block', marginBottom: 12, color: 'var(--text-primary)' }}>Getting Started with MCP:</strong>
@@ -85,7 +85,7 @@ export default function DocsPage() {
               </p>
               <div style={{ background: '#0d0d0d', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 16, marginTop: 12 }}>
                 <code className="mono" style={{ color: 'var(--text-primary)', fontSize: 13, display: 'block' }}>
-                  <span style={{ color: 'var(--cyan)' }}>npx</span> -y https://your-domain.vercel.app/vaultix-mcp.tgz?v=2
+                  <span style={{ color: 'var(--cyan)' }}>npx</span> -y https://your-domain.vercel.app/phantomapi-mcp.tgz?v=2
                 </code>
               </div>
             </div>
@@ -93,7 +93,7 @@ export default function DocsPage() {
             {/* 3. Security */}
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                <Shield size={18} color="var(--green)" />
+                <Shield size={18} color="var(--accent)" />
                 <h3 style={{ fontSize: 17, fontWeight: 600 }}>3. Security & Audit Logs</h3>
               </div>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 16 }}>

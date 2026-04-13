@@ -1,14 +1,14 @@
 {
-  "name": "@nourmohamed/vaultix-sdk",
+  "name": "@phantomapi/sdk",
   "version": "1.0.0",
-  "description": "Vaultix official Node.js SDK",
+  "description": "PhantomAPI official Node.js SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
-  "keywords": ["vaultix", "secrets", "api"],
-  "author": "Vaultix Team",
+  "keywords": ["phantomapi", "secrets", "api"],
+  "author": "PhantomAPI Team",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.0.0"

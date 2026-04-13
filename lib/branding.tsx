@@ -49,7 +49,7 @@ const SIGNATURE_MAP: Record<string, string> = {
   'ghp_': 'github',
   'aws_': 'aws',
   'tg-': 'telegram',
-  'vtx_': 'vaultix'
+  'pa_': 'phantomapi'
 }
 
 const ICON_SLUGS: Record<string, string> = {

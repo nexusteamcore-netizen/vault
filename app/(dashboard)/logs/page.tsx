@@ -10,9 +10,9 @@ interface Log {
 }
 
 const ACTION_COLORS: Record<string, string> = {
-  create: 'badge-green', read: 'badge-accent', update: 'badge-amber',
+  create: 'badge-cyan', read: 'badge-accent', update: 'badge-amber',
   delete: 'badge-red', mcp_read: 'badge-cyan', mcp_list: 'badge-cyan', mcp_write: 'badge-amber',
-  create_token: 'badge-green', delete_token: 'badge-red'
+  create_token: 'badge-cyan', delete_token: 'badge-red'
 }
 const ACTION_LABELS: Record<string, string> = {
   create: 'Created', read: 'Viewed', update: 'Updated', delete: 'Deleted',
@@ -40,7 +40,7 @@ export default function LogsPage() {
           <h1 className="page-title decipher">Access Logs</h1>
           <p className="page-subtitle decipher" style={{ animationDelay: '0.1s' }}>Every secret access, fully audited</p>
         </div>
-        <span className="badge badge-green pulse-green" style={{ alignSelf: 'center' }}>● Live</span>
+        <span className="badge badge-cyan pulse-cyan" style={{ alignSelf: 'center' }}>● Live</span>
       </div>
       <div className="page-body">
         <div className="card card-flush fade-up">
@@ -86,8 +86,8 @@ export default function LogsPage() {
                           <div style={{ 
                             width: 26, 
                             height: 26, 
-                            background: 'rgba(0, 255, 65, 0.02)', 
-                            border: '1px solid rgba(0, 255, 65, 0.15)', 
+                            background: 'rgba(0, 229, 255, 0.02)', 
+                            border: '1px solid rgba(0, 229, 255, 0.15)', 
                             borderRadius: 6, 
                             display: 'flex', 
                             alignItems: 'center', 

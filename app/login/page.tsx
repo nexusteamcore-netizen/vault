@@ -34,9 +34,8 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-box">
-        <div className="auth-logo boot-text" style={{ marginBottom: 40, justifyContent: 'center' }}>
-          <TerminalSquare size={28} className="text-green" />
-          <span style={{ marginLeft: 12, letterSpacing: '0.25em', fontWeight: 800 }}>VAULTIX</span>
+        <div className="auth-logo" style={{ marginBottom: 40, justifyContent: 'center', fontSize: '1.5rem', fontWeight: 500, letterSpacing: '2px' }}>
+          PHANTOM.
         </div>
         <h1 className="auth-title" style={{ fontSize: 28, fontWeight: 700, textAlign: 'center', marginBottom: 8, letterSpacing: '-0.02em' }}>Secure Access</h1>
         <p className="auth-subtitle" style={{ textAlign: 'center', marginBottom: 40, fontSize: 15, opacity: 0.7 }}>Authenticate to your encrypted workspace</p>
@@ -53,10 +52,10 @@ export default function LoginPage() {
             <input id="password" type="password" className="input" placeholder="••••••••••••" style={{ height: 50, fontSize: 15 }} value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: 12, height: 52, fontSize: 16, fontWeight: 600 }}>
-            {loading ? <><span className="spinner" /> Authenticating...</> : 'Login to Vault'}
+            {loading ? <><span className="spinner" /> Authenticating...</> : 'Login to PhantomAPI'}
           </button>
         </form>
-        <p className="auth-switch" style={{ textAlign: 'center', marginTop: 40, fontSize: 14, opacity: 0.8 }}>New operator? <Link href="/register" style={{ color: 'var(--green)', fontWeight: 600 }}>Create an account</Link></p>
+        <p className="auth-switch" style={{ textAlign: 'center', marginTop: 40, fontSize: 14, opacity: 0.8 }}>New operator? <Link href="/register" style={{ color: 'var(--accent)', fontWeight: 600 }}>Create an account</Link></p>
       </div>
     </div>
   )

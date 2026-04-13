@@ -38,7 +38,7 @@ export const PROXY_PROVIDERS: Record<string, Record<string, ProxyEndpoint>> = {
       injectSecret: (secret) => ({ 
         'Authorization': `Bearer ${secret}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'Vaultix-Proxy'
+        'User-Agent': 'PhantomAPI-Proxy'
       })
     }
   }

@@ -44,15 +44,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {booting && (
         <div className="boot-screen">
           <div className="boot-text mono">
-            <span>INIT_VAULT_SYSTEM...</span>
+            <span>INIT_<span style={{ color: 'var(--accent)' }}>PHANTOM</span>_SYSTEM...</span>
             <span className="blink">_</span>
           </div>
         </div>
       )}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <div className="sidebar-logo-mark"><KeySquare size={20} color="black" fill="var(--accent)" /></div>
-          <div className="sidebar-logo-text typewriter" style={{ maxWidth: 80, animationDelay: '0.5s' }}>Vaultix</div>
+          <div className="sidebar-logo-text" style={{ letterSpacing: '2px', fontWeight: 500, fontSize: '1.2rem' }}>PHANTOM.</div>
           <span className="sidebar-logo-badge">Beta</span>
         </div>
 

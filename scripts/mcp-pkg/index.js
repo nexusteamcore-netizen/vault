@@ -3,22 +3,22 @@ const http = require('http');
 const https = require('https');
 
 /**
- * Vaultix MCP Bridge (v4 - Cloud Ready)
+ * PhantomAPI MCP Bridge (v4 - Cloud Ready)
  * Connects Cursor/Claude Desktop to external Vercel API via Stdio.
  */
 
-const TOKEN = process.env.VAULTIX_TOKEN;
-const API_URL = process.env.VAULTIX_URL;
+const TOKEN = process.env.PHANTOMAPI_TOKEN;
+const API_URL = process.env.PHANTOMAPI_URL;
 
 if (!TOKEN || !API_URL) {
-  console.error("[VaultixBridge] Error: Missing VAULTIX_TOKEN or VAULTIX_URL environment variables.");
+  console.error("[PhantomAPIBridge] Error: Missing PHANTOMAPI_TOKEN or PHANTOMAPI_URL environment variables.");
   process.exit(1);
 }
 
 const isHttps = API_URL.startsWith('https');
 const requestSource = isHttps ? https : http;
 
-function log(msg) { console.error(`[VaultixBridge] ${msg}`); }
+function log(msg) { console.error(`[PhantomAPIBridge] ${msg}`); }
 
 let buffer = '';
 
@@ -44,7 +44,7 @@ function handleMessage(request) {
     sendResponse(request.id, {
       protocolVersion: "2024-11-05",
       capabilities: { tools: {} },
-      serverInfo: { name: "vaultix-bridge", version: "4.0.0" }
+      serverInfo: { name: "phantomapi-bridge", version: "4.0.0" }
     });
     return;
   }

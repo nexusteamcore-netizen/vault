@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     const baseUrlEncoded = Buffer.from(`${protocol}://${host}`).toString('base64').replace(/=/g, '')
     
     const randomHash = crypto.randomBytes(16).toString('hex')
-    const token = `vtx_${baseUrlEncoded}_${randomHash}`
+    const token = `pa_${baseUrlEncoded}_${randomHash}`
 
     const created = await prisma.mcpToken.create({
       data: { userId: session.id, name, token },

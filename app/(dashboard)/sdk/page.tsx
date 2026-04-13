@@ -49,7 +49,7 @@ export default function SdkPage() {
       <div className="page-header" style={{ marginBottom: 40 }}>
         <div>
           <h1 className="page-title">Developer SDK</h1>
-          <p className="page-subtitle">Integrate Vaultix directly into your codebase.</p>
+          <p className="page-subtitle">Integrate PhantomAPI directly into your codebase.</p>
         </div>
         <Link href="/mcp" className="btn btn-primary">
           GET_API_KEY
@@ -61,7 +61,7 @@ export default function SdkPage() {
         {/* Integration Methods Container */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-            <Zap size={20} className="pulse-green" style={{ color: 'var(--accent)' }}/>
+            <Zap size={20} className="pulse-cyan" style={{ color: 'var(--accent)' }}/>
             <h2 style={{ fontSize: 18, fontWeight: 600 }}>Plug & Play Integration</h2>
           </div>
 
@@ -80,24 +80,24 @@ export default function SdkPage() {
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 1: Install</div>
                   <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span><span style={{ color: 'var(--accent)' }}>$</span> npm i -g @nourmohamed/vaultix-cli</span>
-                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('npm i -g @nourmohamed/vaultix-cli')}><Copy size={12} /></button>
+                    <span><span style={{ color: 'var(--accent)' }}>$</span> npm i -g @phantomapi/cli</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('npm i -g @phantomapi/cli')}><Copy size={12} /></button>
                   </div>
                 </div>
 
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 2: Login</div>
                   <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span><span style={{ color: 'var(--accent)' }}>$</span> vaultix login &lt;TOKEN&gt;</span>
-                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('vaultix login')}><Copy size={12} /></button>
+                    <span><span style={{ color: 'var(--accent)' }}>$</span> phantomapi login &lt;TOKEN&gt;</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('phantomapi login')}><Copy size={12} /></button>
                   </div>
                 </div>
 
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 3: Retrieve</div>
                   <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span><span style={{ color: 'var(--accent)' }}>$</span> vaultix get firebase</span>
-                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('vaultix get firebase')}><Copy size={12} /></button>
+                    <span><span style={{ color: 'var(--accent)' }}>$</span> phantomapi get firebase</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('phantomapi get firebase')}><Copy size={12} /></button>
                   </div>
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function SdkPage() {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <div style={{ fontSize: 13, color: 'var(--text-primary)', fontWeight: 600 }} className="mono">
-                  <span style={{ color: 'var(--accent)' }}>$</span> npm i @nourmohamed/vaultix-sdk
+                  <span style={{ color: 'var(--accent)' }}>$</span> npm i @phantomapi/sdk
                 </div>
 
                 <div style={{ position: 'relative' }}>
@@ -127,16 +127,16 @@ export default function SdkPage() {
                   lineHeight: 1.6
                 }} className="mono">
   <span style={{ color: '#8b949e' }}>// 1. Put this in your .env</span>{'\n'}
-  <span style={{ color: '#a5d6ff' }}>VAULTIX_API_KEY</span>=your_access_token{'\n\n'}
+  <span style={{ color: '#a5d6ff' }}>PHANTOMAPI_API_KEY</span>=your_access_token{'\n\n'}
   <span style={{ color: '#8b949e' }}>// 2. Use it anywhere in your code</span>{'\n'}
-  <span style={{ color: '#ff7b72' }}>import</span> {'{ Vaultix }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@nourmohamed/vaultix-sdk'</span>;{'\n\n'}
-  <span style={{ color: '#ff7b72' }}>const</span> vault = <span style={{ color: '#ff7b72' }}>new</span> Vaultix();{'\n'}
-  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> vault.get(<span style={{ color: '#a5d6ff' }}>"openai_service"</span>);
+  <span style={{ color: '#ff7b72' }}>import</span> {'{ PhantomAPI }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@phantomapi/sdk'</span>;{'\n\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> api = <span style={{ color: '#ff7b72' }}>new</span> PhantomAPI();{'\n'}
+  <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> api.get(<span style={{ color: '#a5d6ff' }}>"openai_service"</span>);
                 </pre>
                 <button 
                   className="btn btn-ghost btn-sm" 
                   style={{ position: 'absolute', top: 8, right: 8, padding: 4, height: 'auto', background: 'var(--bg-base)' }} 
-                  onClick={() => copy(`import { Vaultix } from '@nourmohamed/vaultix-sdk';\n\nconst vault = new Vaultix();\nconst key = await vault.get("openai_service");`)}
+                  onClick={() => copy(`import { PhantomAPI } from '@phantomapi/sdk';\n\nconst api = new PhantomAPI();\nconst key = await api.get("openai_service");`)}
                 >
                   <Copy size={14} />
                 </button>
@@ -151,7 +151,7 @@ export default function SdkPage() {
             <LinkIcon size={16} /> Using the REST API
           </h2>
           <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20 }}>
-            Under the hood, all official SDKs use the Vaultix REST API. You can generate an API Key on the <Link href="/mcp" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>MCP & Tokens</Link> page, and make direct HTTP requests via <code className="mono">/api/v1/secrets</code>.
+            Under the hood, all official SDKs use the PhantomAPI REST API. You can generate an API Key on the <Link href="/mcp" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>MCP & Tokens</Link> page, and make direct HTTP requests via <code className="mono">/api/v1/secrets</code>.
           </p>
           
           <div style={{ position: 'relative', marginTop: 16 }}>

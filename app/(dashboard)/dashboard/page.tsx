@@ -9,9 +9,9 @@ import { SecretIcon } from '@/lib/branding'
 import { PlusCircle, Eye, Pencil, Trash2, Cpu, KeyRound, Activity, ShieldCheck, Mailbox, Globe, Terminal, Code2, Copy } from 'lucide-react'
 
 const ACTION_COLORS: Record<string, string> = {
-  create: 'badge-green', read: 'badge-accent', update: 'badge-amber',
+  create: 'badge-cyan', read: 'badge-accent', update: 'badge-amber',
   delete: 'badge-red', mcp_read: 'badge-cyan', mcp_list: 'badge-cyan',
-  mcp_write: 'badge-amber', create_token: 'badge-green', delete_token: 'badge-red'
+  mcp_write: 'badge-amber', create_token: 'badge-cyan', delete_token: 'badge-red'
 }
 const ACTION_LABELS: Record<string, string> = {
   create: 'Created API Key', read: 'Viewed Secret', update: 'Updated Key', delete: 'Deleted Secret',
@@ -77,7 +77,7 @@ export default function DashboardPage() {
             <div key={s.label} className="stat-card fade-up">
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
                 <span style={{ fontSize: 22 }}>{s.icon}</span>
-                <span className="badge badge-muted pulse-green">Live</span>
+                <span className="badge badge-muted pulse-cyan">Live</span>
               </div>
               <div className="stat-value data-value" style={{ color: s.color }}>{loading ? '—' : s.value}</div>
               <div className="stat-label" style={{ letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 11, opacity: 0.8 }}>{s.label}</div>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
             border: '1px solid rgba(255,255,255,0.05)'
           }} className="card fade-up">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-              <h2 style={{ fontSize: 15, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 10, color: 'var(--text-primary)' }}>
+              <h2 style={{ fontSize: 16, fontWeight: 300, display: 'flex', alignItems: 'center', gap: 10, color: 'var(--text-primary)' }}>
                 <Terminal size={18} style={{ color: 'var(--accent)', opacity: 0.9 }} /> Developer Toolkit
               </h2>
               <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--accent)', background: 'rgba(0, 250, 154, 0.05)', padding: '2px 8px', borderRadius: 4, border: '1px solid rgba(0, 250, 154, 0.1)' }}>v1.0.1</span>
@@ -109,9 +109,9 @@ export default function DashboardPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 0 }}>
               {[
-                'npm i -g @nourmohamed/vaultix-cli',
-                'vaultix login <TOKEN>',
-                'vaultix get firebase'
+                'npm i -g @phantomapi/cli',
+                'phantomapi login <TOKEN>',
+                'phantomapi get firebase'
               ].map((cmd, i) => (
                 <div key={i} style={{
                   display: 'flex',
@@ -134,7 +134,7 @@ export default function DashboardPage() {
           {/* Activity (Right) */}
           <div className="card fade-up" style={{ animationDelay: '0.15s', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-              <h2 style={{ fontSize: 16, fontWeight: 600 }}>Recent Activity</h2>
+              <h2 style={{ fontSize: 16, fontWeight: 300 }}>Recent Activity</h2>
               <Link href="/logs" className="btn btn-ghost btn-sm">View all →</Link>
             </div>
             {loading ? (
@@ -186,14 +186,14 @@ export default function DashboardPage() {
         {/* Quick actions */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 20 }}>
           <div className="card fade-up" style={{ animationDelay: '0.15s' }}>
-            <h3 style={{ fontSize: 14, fontWeight: 600, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 300, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
               <KeyRound size={16} className="text-accent" /> Vault
             </h3>
             <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 16 }}>Add and manage your encrypted API keys</p>
             <Link href="/vault" className="btn btn-secondary btn-sm">Open Vault →</Link>
           </div>
           <div className="card fade-up" style={{ animationDelay: '0.2s' }}>
-            <h3 style={{ fontSize: 14, fontWeight: 600, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 300, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
               <Cpu size={16} className="text-cyan" /> MCP Integration
             </h3>
             <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 16 }}>Let AI agents fetch your credentials automatically</p>

@@ -22,7 +22,18 @@ export default function RegisterPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
       })
-      const data = await res.json()
+      
+      const text = await res.text()
+      let data
+      try {
+        data = JSON.parse(text)
+      } catch (parseErr) {
+        console.error('Server returned non-JSON:', text)
+        const titleMatch = text.match(/<title>(.*?)<\/title>/)
+        const errorMessage = titleMatch ? `Server Error: ${titleMatch[1]}` : `Server returned HTML. (Check console for details)`
+        throw new Error(errorMessage)
+      }
+
       if (!res.ok) throw new Error(data.error || 'Registration failed')
       router.push('/dashboard')
     } catch (err: any) {
@@ -35,12 +46,11 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-box">
-        <div className="auth-logo boot-text" style={{ marginBottom: 28, justifyContent: 'center' }}>
-          <TerminalSquare size={28} className="text-green" />
-          <span style={{ marginLeft: 12, letterSpacing: '0.25em', fontWeight: 800 }}>VAULTIX</span>
+        <div className="auth-logo" style={{ marginBottom: 28, justifyContent: 'center', fontSize: '1.5rem', fontWeight: 500, letterSpacing: '2px' }}>
+          PHANTOM.
         </div>
         <h1 className="auth-title" style={{ fontSize: 28, fontWeight: 700, textAlign: 'center', marginBottom: 8, letterSpacing: '-0.02em' }}>Create Account</h1>
-        <p className="auth-subtitle" style={{ textAlign: 'center', marginBottom: 24, fontSize: 15, opacity: 0.7 }}>Secure your assets with Vaultix</p>
+        <p className="auth-subtitle" style={{ textAlign: 'center', marginBottom: 24, fontSize: 15, opacity: 0.7 }}>Secure your assets with PhantomAPI</p>
 
         {error && <div className="auth-error" style={{ marginBottom: 16 }}>{error}</div>}
 
@@ -58,10 +68,10 @@ export default function RegisterPage() {
             <input id="password" type="password" className="input" placeholder="Min 8 characters" style={{ height: 50, fontSize: 15 }} value={password} onChange={e => setPassword(e.target.value)} required minLength={8} />
           </div>
           <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: 12, height: 52, fontSize: 16, fontWeight: 600 }}>
-            {loading ? <><span className="spinner" /> Generating Keys...</> : 'Initialize Vault'}
+            {loading ? <><span className="spinner" /> Generating Keys...</> : 'Initialize PhantomAPI'}
           </button>
         </form>
-        <p className="auth-switch" style={{ textAlign: 'center', marginTop: 24, fontSize: 14, opacity: 0.8 }}>Already registered? <Link href="/login" style={{ color: 'var(--green)', fontWeight: 600 }}>Secure Login</Link></p>
+        <p className="auth-switch" style={{ textAlign: 'center', marginTop: 32, fontSize: 14, opacity: 0.8 }}>Existing operator? <Link href="/login" style={{ color: 'var(--accent)', fontWeight: 600 }}>Authenticate here</Link></p>
       </div>
     </div>
   )

@@ -1,0 +1,15 @@
+{
+  "name": "@phantomapi/cli",
+  "version": "1.0.2",
+  "description": "PhantomAPI official CLI tool fetching secrets right from your terminal",
+  "main": "bin/cli.js",
+  "bin": {
+    "phantomapi": "./bin/cli.js"
+  },
+  "dependencies": {
+    "@phantomapi/sdk": "^1.0.0"
+  },
+  "keywords": ["phantomapi", "cli", "secrets", "api"],
+  "author": "PhantomAPI Team",
+  "license": "MIT"
+}

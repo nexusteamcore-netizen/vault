@@ -84,10 +84,10 @@ export default function McpPage() {
 
   const claudeConfig = (token: string) => JSON.stringify({
     mcpServers: {
-      vaultix: {
+      phantomapi: {
         command: 'npx',
-        args: ['-y', `${appUrl || 'https://your-domain.com'}/vaultix-mcp.tgz?v=2`],
-        env: { VAULTIX_TOKEN: token, VAULTIX_URL: `${appUrl || 'https://your-domain.com'}/api/mcp` },
+        args: ['-y', `${appUrl || 'https://your-domain.com'}/phantomapi-mcp.tgz?v=2`],
+        env: { PHANTOMAPI_TOKEN: token, PHANTOMAPI_URL: `${appUrl || 'https://your-domain.com'}/api/mcp` },
       },
     },
   }, null, 2)
@@ -120,7 +120,7 @@ export default function McpPage() {
               <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>What is MCP?</h2>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                 The <strong style={{ color: 'var(--cyan)' }}>Model Context Protocol</strong> lets AI agents like Claude and Cursor securely call tools on your behalf.
-                With Vaultix + MCP, your agent can call <code style={{ background: 'var(--bg-input)', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>get_secret("OPENAI_API_KEY")</code> and receive your decrypted key — no hardcoding required.
+                With PhantomAPI + MCP, your agent can call <code style={{ background: 'var(--bg-input)', padding: '2px 6px', borderRadius: 4, fontSize: 12 }}>get_secret("OPENAI_API_KEY")</code> and receive your decrypted key — no hardcoding required.
               </p>
             </div>
           </div>

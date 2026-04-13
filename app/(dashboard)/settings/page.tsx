@@ -97,17 +97,17 @@ export default function SettingsPage() {
           {/* Secondary Column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             {/* Encryption info */}
-            <div className="card fade-up" style={{ animationDelay: '0.1s', borderColor: 'rgba(16,185,129,0.2)', background: 'rgba(16,185,129,0.04)' }}>
+            <div className="card fade-up" style={{ animationDelay: '0.1s', borderColor: 'rgba(0, 229, 255,0.2)', background: 'rgba(0, 229, 255,0.04)' }}>
               <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                <div style={{ color: 'var(--green)', flexShrink: 0 }}><Shield size={24} /></div>
+                <div style={{ color: 'var(--accent)', flexShrink: 0 }}><Shield size={24} /></div>
                 <div>
-                  <h2 style={{ fontSize: 14, fontWeight: 600, marginBottom: 6, color: 'var(--green)' }}>Encryption Protocol</h2>
+                  <h2 style={{ fontSize: 14, fontWeight: 600, marginBottom: 6, color: 'var(--accent)' }}>Encryption Protocol</h2>
                   <p style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                     Secrets are encrypted using <strong>AES-256-GCM</strong>. Your master key is never stored in plain text.
                   </p>
                   <div style={{ marginTop: 10, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                    <span className="badge badge-green" style={{ fontSize: 9 }}>AES-256</span>
-                    <span className="badge badge-green" style={{ fontSize: 9 }}>GCM</span>
+                    <span className="badge badge-cyan" style={{ fontSize: 9 }}>AES-256</span>
+                    <span className="badge badge-cyan" style={{ fontSize: 9 }}>GCM</span>
                   </div>
                 </div>
               </div>

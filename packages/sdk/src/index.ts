@@ -1,14 +1,14 @@
-export class Vaultix {
+export class PhantomAPI {
   private apiKey: string;
   private baseUrl: string;
 
   constructor(options?: { apiKey?: string; baseUrl?: string }) {
     // Attempt to load from env if not explicitly provided
-    this.apiKey = options?.apiKey || process.env.VAULTIX_API_KEY || '';
+    this.apiKey = options?.apiKey || process.env.PHANTOMAPI_API_KEY || '';
 
     // Auto-detect base URL from smart token if available
     let smartUrl = '';
-    if (this.apiKey && this.apiKey.startsWith('vtx_')) {
+    if (this.apiKey && this.apiKey.startsWith('pa_')) {
       const parts = this.apiKey.split('_');
       if (parts.length === 3) {
         try {
@@ -20,10 +20,10 @@ export class Vaultix {
       }
     }
 
-    this.baseUrl = options?.baseUrl || process.env.VAULTIX_URL || smartUrl || 'http://localhost:3000';
+    this.baseUrl = options?.baseUrl || process.env.PHANTOMAPI_URL || smartUrl || 'http://localhost:3000';
 
     if (!this.apiKey) {
-      throw new Error('Vaultix SDK requires an API key. Pass it in options or set VAULTIX_API_KEY in your environment.');
+      throw new Error('PhantomAPI SDK requires an API key. Pass it in options or set PHANTOMAPI_API_KEY in your environment.');
     }
   }
 
@@ -43,7 +43,7 @@ export class Vaultix {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Vaultix Error: ${data.error || response.statusText}`);
+      throw new Error(`PhantomAPI Error: ${data.error || response.statusText}`);
     }
 
     return data.value;
@@ -65,7 +65,7 @@ export class Vaultix {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Vaultix Error: ${data.error || response.statusText}`);
+      throw new Error(`PhantomAPI Error: ${data.error || response.statusText}`);
     }
 
     return data.secrets;
@@ -92,7 +92,7 @@ export class Vaultix {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Vaultix Error: ${data.error || response.statusText}`);
+      throw new Error(`PhantomAPI Error: ${data.error || response.statusText}`);
     }
 
     return data;
@@ -114,15 +114,15 @@ export class Vaultix {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Vaultix Error: ${data.error || response.statusText}`);
+      throw new Error(`PhantomAPI Error: ${data.error || response.statusText}`);
     }
 
     return data;
   }
 
   /**
-   * Execute a remote API securely via Vaultix without exposing your secret.
-   * Vaultix injects the secret server-side into a secure predefined provider endpoint.
+   * Execute a remote API securely via PhantomAPI without exposing your secret.
+   * PhantomAPI injects the secret server-side into a secure predefined provider endpoint.
    */
   async execute(options: { secretName: string, provider: string, endpoint: string, payload?: any }): Promise<any> {
     const url = `${this.baseUrl}/api/v1/proxy`;
@@ -138,7 +138,7 @@ export class Vaultix {
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Vaultix Execute Error: ${result.error || response.statusText}`);
+      throw new Error(`PhantomAPI Execute Error: ${result.error || response.statusText}`);
     }
 
     return result.data || result;
