@@ -63,11 +63,11 @@ export default function LogsPage() {
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', tableLayout: 'fixed' }}>
                 <thead>
                   <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--border-color)' }}>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Action</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Target Identity</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Source Client</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Ip Origin</th>
-                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 600, width: '20%' }}>Date & Time</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 500, width: '20%' }}>Action</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 500, width: '20%' }}>Target Identity</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 500, width: '20%' }}>Source Client</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 500, width: '20%' }}>Ip Origin</th>
+                    <th style={{ padding: '16px 24px', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', fontWeight: 500, width: '20%' }}>Date & Time</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -76,7 +76,7 @@ export default function LogsPage() {
                       <td style={{ padding: '20px 24px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                           <Globe size={16} className="text-muted" style={{ opacity: 0.6 }} />
-                          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>
+                          <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--text-primary)' }}>
                             {ACTION_LABELS[log.action] || log.action}
                           </span>
                         </div>
@@ -94,16 +94,16 @@ export default function LogsPage() {
                             justifyContent: 'center', 
                             color: '#fff'
                           }}>
-                             <span style={{ fontSize: 11, fontWeight: 600, fontFamily: 'var(--font-mono)' }}>{'>_'}</span>
+                             <span style={{ fontSize: 11, fontWeight: 400, fontFamily: 'var(--font-mono)' }}>{'>_'}</span>
                           </div>
-                          <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: 14 }}>
+                          <span style={{ color: 'var(--text-primary)', fontWeight: 400, fontSize: 14 }}>
                             {log.secret?.name || (log.action === 'copy' && log.source === 'web_mcp' ? 'MCP Access Key' : 'System Core')}
                           </span>
                         </div>
                       </td>
                       <td style={{ padding: '20px 24px' }}>
                         <div style={{ background: 'rgba(255,255,255,0.03)', padding: '6px 14px', borderRadius: 20, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                           <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+                           <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                              {log.source === 'mcp' ? 'MCP CONSOLE' : 'WEB CONSOLE'}
                            </span>
                         </div>

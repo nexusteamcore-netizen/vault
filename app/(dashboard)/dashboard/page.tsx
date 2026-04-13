@@ -160,15 +160,15 @@ export default function DashboardPage() {
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         color: 'var(--accent)', flexShrink: 0
                       }}>
-                        <span style={{ fontSize: 13, fontWeight: 800 }}>{'>_'}</span>
+                        <span style={{ fontSize: 13, fontWeight: 300 }}>{'>_'}</span>
                       </div>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
+                          <span style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-primary)' }}>
                             {ACTION_LABELS[log.action] || log.action}
                           </span>
                         </div>
-                        <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>
+                        <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 400 }}>
                           {log.secret?.name || (log.action === 'copy' && log.source === 'web_mcp' ? 'MCP Access Key' : 'System')} · {log.source === 'web_mcp' ? 'MCP' : (log.source === 'mcp' ? 'AI' : 'Web')}
                         </div>
                       </div>

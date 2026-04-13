@@ -183,7 +183,7 @@ export default function VaultPage() {
                         borderColor: addService === c.id ? 'var(--accent)' : 'var(--border)',
                         background: addService === c.id ? 'var(--accent-dim)' : 'var(--bg-input)',
                         cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-                        fontSize: 12, fontWeight: 500, color: addService === c.id ? 'var(--accent)' : 'var(--text-secondary)',
+                        fontSize: 12, fontWeight: 400, color: addService === c.id ? 'var(--accent)' : 'var(--text-secondary)',
                       }}>
                       <span style={{ transform: 'scale(0.95)' }}>{c.icon}</span>{c.label}
                     </button>
@@ -310,7 +310,7 @@ export default function VaultPage() {
                 <div className="vault-empty-icon pulse-cyan" style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
                   <LockKeyhole size={64} strokeWidth={1} color="var(--accent)" style={{ opacity: 0.2 }} />
                 </div>
-                <p style={{ fontSize: 16, fontWeight: 600 }} className="decipher">Workspace Locked</p>
+                <p style={{ fontSize: 16, fontWeight: 500 }} className="decipher">Workspace Locked</p>
                 <p className="decipher" style={{ fontSize: 13, animationDelay: '0.1s' }}>Select a node from the left to view credentials</p>
               </div>
             ) : detailLoading ? (
@@ -362,7 +362,7 @@ export default function VaultPage() {
                 {/* Digital Identity Metadata */}
                 <div className="card" style={{ marginBottom: 20, padding: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Security Identity</div>
+                    <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>Security Identity</div>
                     <div className="badge badge-cyan" style={{ fontSize: 9, padding: '2px 8px', border: '1px solid rgba(0, 229, 255,0.2)', letterSpacing: '0.02em' }}>
                       <ShieldCheck size={10} style={{ marginRight: 4 }} /> AES-256 SECURED
                     </div>
@@ -385,7 +385,7 @@ export default function VaultPage() {
                           <div style={{ color: 'var(--text-muted)', display: 'flex' }}>{m.icon}</div>
                           <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{m.label}</span>
                         </div>
-                        <span className="mono" style={{ fontSize: 13, color: 'var(--text-primary)', fontWeight: 500 }}>{m.value}</span>
+                        <span className="mono" style={{ fontSize: 13, color: 'var(--text-primary)', fontWeight: 400 }}>{m.value}</span>
                       </div>
                     ))}
                   </div>
