@@ -56,7 +56,7 @@ export default function SettingsPage() {
             <div className="card fade-up">
               <h2 style={{ fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Profile</h2>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-                <div style={{ width: 56, height: 56, background: 'var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700, boxShadow: '0 0 20px var(--accent-glow)' }}>
+                <div style={{ width: 56, height: 56, background: 'var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 500, color: '#fff' }}>
                   {(user?.name || user?.email || 'V')[0].toUpperCase()}
                 </div>
                 <div>
