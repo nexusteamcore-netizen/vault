@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhantomAPI — Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .bg-grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); }
+        input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 30px #09090b inset !important; -webkit-text-fill-color: white !important; transition: background-color 5000s ease-in-out 0s; }
+        #error-message { display: none; }
+    </style>
+</head>
+
+<body class="bg-black text-white min-h-screen flex w-full selection:bg-zinc-800 selection:text-white">
+    <div class="flex w-full min-h-screen">
+        <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12 overflow-hidden border-r border-zinc-900">
+            <div class="absolute inset-0 bg-zinc-950 bg-grain z-0"></div>
+            <div class="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-zinc-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-zinc-800/10 blur-[100px] rounded-full pointer-events-none"></div>
+            <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 60px 60px;"></div>
+            <div class="relative z-10">
+                <div class="brand" style="font-size: 1.2rem; font-weight: 500; letter-spacing: 2px; color: #fff;">PHANTOM.</div>
+            </div>
+            <div class="relative z-10 max-w-lg">
+                <span class="iconify text-zinc-600 mb-6" data-icon="lucide:quote" data-width="24" data-height="24"></span>
+                <p class="text-xl font-light leading-relaxed text-zinc-300 tracking-tight">
+                    "Security should be invisible, yet immutable. PhantomAPI provides the zero-trust infrastructure that secures the world's most sensitive digital credentials."
+                </p>
+                <div class="mt-8 flex items-center gap-4">
+                    <div class="h-10 w-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs text-zinc-400 font-medium">JD</div>
+                    <div>
+                        <p class="text-sm font-medium text-white">Julian Davis</p>
+                        <p class="text-xs text-zinc-500">CTO, Archetype Inc.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative z-10 flex justify-between items-end text-xs text-zinc-600 font-medium uppercase tracking-widest">
+                <span>System Status: Optimal</span>
+                <span>© 2026 PHANTOM.API</span>
+            </div>
+        </div>
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-black relative z-20">
+            <div class="absolute top-8 left-8 lg:hidden">
+                <div class="brand" style="font-size: 1.2rem; font-weight: 500; letter-spacing: 2px; color: #fff;">PHANTOM.</div>
+            </div>
+            <div class="w-full max-w-[380px] space-y-8">
+                <div class="text-center space-y-2">
+                    <h1 class="text-2xl font-medium tracking-tight text-white">Request access</h1>
+                    <p class="text-sm text-zinc-500 font-normal">Create your credentials to join the workspace.</p>
+                </div>
+                <div id="error-message" class="text-red-400 text-xs text-center border border-red-900/50 bg-red-950/20 py-2 rounded-lg"></div>
+                <form id="register-form" class="space-y-5">
+                    <div class="space-y-1.5">
+                        <label for="name" class="text-xs font-medium text-zinc-400 block ml-1">Full Name</label>
+                        <div class="relative group">
+                            <input type="text" id="name" required
+                                class="w-full bg-zinc-950 border border-zinc-800 text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-600 transition-all placeholder-zinc-700 shadow-sm"
+                                placeholder="Operator Name" autocomplete="name">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label for="email" class="text-xs font-medium text-zinc-400 block ml-1">Email address</label>
+                        <div class="relative group">
+                            <input type="email" id="email" required
+                                class="w-full bg-zinc-950 border border-zinc-800 text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-600 transition-all placeholder-zinc-700 shadow-sm"
+                                placeholder="name@company.com" autocomplete="email">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label for="password" class="text-xs font-medium text-zinc-400 block ml-1">Password</label>
+                        <div class="relative group">
+                            <input type="password" id="password" required
+                                class="w-full bg-zinc-950 border border-zinc-800 text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-600 transition-all placeholder-zinc-700 shadow-sm"
+                                placeholder="••••••••" autocomplete="new-password">
+                        </div>
+                    </div>
+                    <button type="submit" id="submit-btn"
+                        class="w-full bg-white text-black hover:bg-zinc-200 focus:ring-4 focus:ring-zinc-800 font-medium rounded-lg text-sm px-5 py-3 text-center transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                        Request access
+                    </button>
+                </form>
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center"><div className="w-full border-t border-zinc-900"></div></div>
+                    <div class="relative flex justify-center text-xs uppercase"><span class="bg-black px-2 text-zinc-600 tracking-wider">Or continue with</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="flex items-center justify-center gap-2 bg-zinc-950 border border-zinc-800 hover:border-zinc-600 hover:bg-zinc-900 text-white rounded-lg py-2.5 transition-all duration-200 group">
+                        <span class="iconify text-zinc-400 group-hover:text-white transition-colors" data-icon="lucide:github" data-width="18" data-height="18"></span>
+                        <span class="text-xs font-medium text-zinc-400 group-hover:text-white transition-colors">GitHub</span>
+                    </button>
+                    <button class="flex items-center justify-center gap-2 bg-zinc-950 border border-zinc-800 hover:border-zinc-600 hover:bg-zinc-900 text-white rounded-lg py-2.5 transition-all duration-200 group">
+                        <span class="iconify text-zinc-400 group-hover:text-white transition-colors" data-icon="lucide:chrome" data-width="18" data-height="18"></span>
+                        <span class="text-xs font-medium text-zinc-400 group-hover:text-white transition-colors">Google</span>
+                    </button>
+                </div>
+                <p class="text-center text-xs text-zinc-500 pt-4">
+                    Already an operator?
+                    <a href="/login" class="font-medium text-white hover:underline decoration-zinc-500 underline-offset-4 transition-all">Sign in</a>
+                </p>
+            </div>
+            <div class="absolute bottom-8 right-8">
+                <a href="#" class="flex items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors">
+                    <span class="text-xs font-medium">Help &amp; Support</span>
+                    <span class="iconify" data-icon="lucide:arrow-right" data-width="14" data-height="14"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('register-form');
+        const errorDiv = document.getElementById('error-message');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Initializing...';
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password }),
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Registration failed');
+                window.location.href = '/dashboard';
+            } catch (err) {
+                errorDiv.innerText = err.message;
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Request access';
+            }
+        });
+    </script>
+</body>
+</html>

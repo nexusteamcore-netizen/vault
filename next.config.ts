@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
           source: '/',
           destination: '/landing.html',
         },
+        {
+          source: '/login',
+          destination: '/login.html',
+        },
+        {
+          source: '/register',
+          destination: '/register.html',
+        },
       ],
     }
   },
