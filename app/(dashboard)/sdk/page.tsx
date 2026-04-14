@@ -1,11 +1,10 @@
 'use client'
 import { useState } from 'react'
-import { Copy, Terminal, Zap, Code2, Link as LinkIcon, ExternalLink } from 'lucide-react'
+import { Copy, Terminal, Zap, Code2, Link as LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function SdkPage() {
   const [toast, setToast] = useState<{ msg: string; type: string } | null>(null)
-  const [isReady, setIsReady] = useState(true) // Toggle this to true to restore the UI
 
   function showToast(msg: string, type = 'info') {
     setToast({ msg, type })
@@ -15,25 +14,6 @@ export default function SdkPage() {
   function copy(text: string) {
     navigator.clipboard.writeText(text)
     showToast('Copied to clipboard!', 'success')
-  }
-
-  if (!isReady) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        height: '60vh',
-        fontFamily: 'sans-serif'
-      }}>
-        <h1 style={{ 
-          fontSize: 16, 
-          fontWeight: 400, 
-          color: 'var(--text-muted)',
-          letterSpacing: '0.1em'
-        }}>Coming Soon</h1>
-      </div>
-    )
   }
 
   return (
@@ -60,109 +40,143 @@ export default function SdkPage() {
 
         {/* Integration Methods Container */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-            <Zap size={20} className="pulse-cyan" style={{ color: 'var(--accent)' }}/>
-            <h2 style={{ fontSize: 18, fontWeight: 600 }}>Plug & Play Integration</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+            <Zap size={16} className="pulse-cyan" style={{ color: 'var(--accent)' }} />
+            <h2 style={{
+              fontSize: 'var(--text-lg)',
+              fontWeight: 'var(--fw-regular)',
+              letterSpacing: 'var(--tracking-snug)',
+              color: 'var(--text-primary)'
+            }}>Plug &amp; Play Integration</h2>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 20 }}>
-            
+
             {/* CLI Card */}
             <div className="card" style={{ background: 'rgba(5, 5, 5, 0.8)', borderColor: 'var(--border)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)' }}>
-                  <Terminal size={16} /> <span style={{ fontSize: 14, fontWeight: 600 }}>Global CLI</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Terminal size={15} style={{ color: 'var(--text-muted)' }} />
+                  <span style={{
+                    fontSize: 'var(--text-base)',
+                    fontWeight: 'var(--fw-normal)',
+                    letterSpacing: 'var(--tracking-snug)',
+                    color: 'var(--text-secondary)'
+                  }}>Global CLI</span>
                 </div>
                 <span className="badge badge-muted">v1.0.0</span>
               </div>
-              
+
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <div>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 1: Install</div>
-                  <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span><span style={{ color: 'var(--accent)' }}>$</span> npm i -g @phantomapi/cli</span>
-                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('npm i -g @phantomapi/cli')}><Copy size={12} /></button>
+                {[
+                  { step: 'Step 1: Install', cmd: 'npm i -g @phantomapi/cli' },
+                  { step: 'Step 2: Login', cmd: 'phantomapi login <TOKEN>' },
+                  { step: 'Step 3: Retrieve', cmd: 'phantomapi get firebase' },
+                ].map(({ step, cmd }) => (
+                  <div key={step}>
+                    <div style={{
+                      fontSize: 'var(--text-2xs)',
+                      fontWeight: 'var(--fw-medium)',
+                      color: 'var(--text-muted)',
+                      letterSpacing: 'var(--tracking-caps)',
+                      textTransform: 'uppercase',
+                      marginBottom: 6
+                    }}>{step}</div>
+                    <div className="mono" style={{
+                      fontSize: 13,
+                      background: 'var(--bg-base)',
+                      border: '1px solid var(--border)',
+                      padding: '10px 14px',
+                      borderRadius: 6,
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                    }}>
+                      <span><span style={{ color: 'var(--accent)' }}>$</span> {cmd}</span>
+                      <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy(cmd)}>
+                        <Copy size={12} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-
-                <div>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 2: Login</div>
-                  <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span><span style={{ color: 'var(--accent)' }}>$</span> phantomapi login &lt;TOKEN&gt;</span>
-                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('phantomapi login')}><Copy size={12} /></button>
-                  </div>
-                </div>
-
-                <div>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, textTransform: 'uppercase', fontWeight: 600 }}>Step 3: Retrieve</div>
-                  <div className="mono" style={{ fontSize: 13, background: 'var(--bg-base)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span><span style={{ color: 'var(--accent)' }}>$</span> phantomapi get firebase</span>
-                    <button className="btn btn-ghost btn-sm" style={{ padding: 4, height: 'auto' }} onClick={() => copy('phantomapi get firebase')}><Copy size={12} /></button>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* SDK Card */}
             <div className="card" style={{ background: 'rgba(5, 5, 5, 0.8)', borderColor: 'var(--border)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)' }}>
-                  <Code2 size={16} /> <span style={{ fontSize: 14, fontWeight: 600 }}>Node.js SDK</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Code2 size={15} style={{ color: 'var(--text-muted)' }} />
+                  <span style={{
+                    fontSize: 'var(--text-base)',
+                    fontWeight: 'var(--fw-normal)',
+                    letterSpacing: 'var(--tracking-snug)',
+                    color: 'var(--text-secondary)'
+                  }}>Node.js SDK</span>
                 </div>
               </div>
-              
+
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div style={{ fontSize: 13, color: 'var(--text-primary)', fontWeight: 600 }} className="mono">
+                <div className="mono" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
                   <span style={{ color: 'var(--accent)' }}>$</span> npm i @phantomapi/sdk
                 </div>
 
                 <div style={{ position: 'relative' }}>
-                <pre style={{ 
-                  background: 'var(--bg-base)', 
-                  border: '1px solid var(--border)', 
-                  borderRadius: 'var(--radius-md)', 
-                  padding: '16px',
-                  overflow: 'auto',
-                  fontSize: 13,
-                  lineHeight: 1.6
-                }} className="mono">
+                  <pre style={{
+                    background: 'var(--bg-base)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 6,
+                    padding: '16px',
+                    overflow: 'auto',
+                    fontSize: 12,
+                    lineHeight: 1.7
+                  }} className="mono">
   <span style={{ color: '#8b949e' }}>// 1. Put this in your .env</span>{'\n'}
   <span style={{ color: '#a5d6ff' }}>PHANTOMAPI_API_KEY</span>=your_access_token{'\n\n'}
   <span style={{ color: '#8b949e' }}>// 2. Use it anywhere in your code</span>{'\n'}
   <span style={{ color: '#ff7b72' }}>import</span> {'{ PhantomAPI }'} <span style={{ color: '#ff7b72' }}>from</span> <span style={{ color: '#a5d6ff' }}>'@phantomapi/sdk'</span>;{'\n\n'}
   <span style={{ color: '#ff7b72' }}>const</span> api = <span style={{ color: '#ff7b72' }}>new</span> PhantomAPI();{'\n'}
   <span style={{ color: '#ff7b72' }}>const</span> key = <span style={{ color: '#ff7b72' }}>await</span> api.get(<span style={{ color: '#a5d6ff' }}>"openai_service"</span>);
-                </pre>
-                <button 
-                  className="btn btn-ghost btn-sm" 
-                  style={{ position: 'absolute', top: 8, right: 8, padding: 4, height: 'auto', background: 'var(--bg-base)' }} 
-                  onClick={() => copy(`import { PhantomAPI } from '@phantomapi/sdk';\n\nconst api = new PhantomAPI();\nconst key = await api.get("openai_service");`)}
-                >
-                  <Copy size={14} />
-                </button>
+                  </pre>
+                  <button
+                    className="btn btn-ghost btn-sm"
+                    style={{ position: 'absolute', top: 8, right: 8, padding: 4, height: 'auto', background: 'var(--bg-base)' }}
+                    onClick={() => copy(`import { PhantomAPI } from '@phantomapi/sdk';\n\nconst api = new PhantomAPI();\nconst key = await api.get("openai_service");`)}
+                  >
+                    <Copy size={14} />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* REST API & Instructions section */}
-        <div className="card fade-up" style={{ animationDelay: '0.1s', marginTop: 24 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <LinkIcon size={16} /> Using the REST API
+        {/* REST API section */}
+        <div className="card fade-up" style={{ animationDelay: '0.1s' }}>
+          <h2 style={{
+            fontSize: 'var(--text-lg)',
+            fontWeight: 'var(--fw-regular)',
+            letterSpacing: 'var(--tracking-snug)',
+            marginBottom: 12,
+            display: 'flex', alignItems: 'center', gap: 8,
+            color: 'var(--text-primary)'
+          }}>
+            <LinkIcon size={15} style={{ color: 'var(--text-muted)' }} /> Using the REST API
           </h2>
-          <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20 }}>
-            Under the hood, all official SDKs use the PhantomAPI REST API. You can generate an API Key on the <Link href="/mcp" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>MCP & Tokens</Link> page, and make direct HTTP requests via <code className="mono">/api/v1/secrets</code>.
+          <p className="body-text" style={{ marginBottom: 20 }}>
+            Under the hood, all official SDKs use the PhantomAPI REST API. You can generate an API Key on the{' '}
+            <Link href="/mcp" style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3 }}>MCP &amp; Tokens</Link> page,
+            and make direct HTTP requests via <code className="mono" style={{ fontSize: 12, color: 'var(--accent)' }}>/api/v1/secrets</code>.
           </p>
-          
-          <div style={{ position: 'relative', marginTop: 16 }}>
-            <pre style={{ 
-              background: 'var(--bg-input)', 
-              padding: 16, 
-              borderRadius: 'var(--radius-md)', 
-              border: '1px solid var(--border)', 
-              color: 'var(--text-primary)', 
-              fontSize: 13,
-              overflowX: 'auto'
+
+          <div style={{ position: 'relative' }}>
+            <pre style={{
+              background: 'var(--bg-input)',
+              padding: 16,
+              borderRadius: 6,
+              border: '1px solid var(--border)',
+              color: 'var(--text-primary)',
+              fontSize: 12,
+              overflowX: 'auto',
+              lineHeight: 1.7
             }} className="mono">
   <span style={{ color: '#ff7b72' }}>const</span> response = <span style={{ color: '#ff7b72' }}>await</span> fetch(<span style={{ color: '#a5d6ff' }}>'https://yourapp.net/api/v1/secrets/STRIPE_KEY'</span>, {'{\n'}
     headers: {'{\n'}
@@ -174,7 +188,6 @@ export default function SdkPage() {
           </div>
         </div>
       </div>
-    </div>
-  </>
+    </>
   )
 }

@@ -1,49 +1,113 @@
 @import "tailwindcss";
 
-/* ─── Tokens (PhantomAPI Cyper/Minimalist Theme) ───────────────────────── */
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+/* PhantomAPI · Cyber/Minimalist · Inspired by Landing Page Aesthetic       */
 :root {
+  /* ── Backgrounds */
   --bg-base: #09090b;
   --bg-surface: rgba(15, 15, 18, 0.4);
   --bg-elevated: rgba(255, 255, 255, 0.02);
   --bg-input: rgba(255, 255, 255, 0.03);
+
+  /* ── Borders */
   --border: rgba(255, 255, 255, 0.05);
+  --border-subtle: rgba(255, 255, 255, 0.03);
   --border-hover: rgba(0, 229, 255, 0.3);
+
+  /* ── Brand Accent (Cyber Blue) */
   --accent: #00e5ff;
-  --accent-dim: rgba(0, 229, 255, 0.1);
+  --accent-dim: rgba(0, 229, 255, 0.08);
   --accent-glow: rgba(0, 229, 255, 0.12);
   --cyan: #00e5ff;
-  --cyan-dim: rgba(0, 229, 255, 0.1);
+  --cyan-dim: rgba(0, 229, 255, 0.08);
 
+  /* ── Semantic Colors */
   --red: #ef4444;
   --amber: #f59e0b;
+  --green: #22d3ee;
+
+  /* ── Typography Scale ─ Unified with Landing Page */
+  /* Primary text — pure white for highest contrast */
   --text-primary: #ffffff;
+  /* Secondary — muted zinc, readable but recessed */
   --text-secondary: #a1a1aa;
+  /* Muted — deep zinc for labels, meta, placeholders */
   --text-muted: #52525b;
+  /* Faint — barely-there annotations */
+  --text-faint: #3f3f46;
+
+  /* ── Font Stacks */
+  /* Outfit: used by landing page — this is our brand face */
+  --font-sans: var(--font-outfit), 'Outfit', system-ui, sans-serif;
+  /* JetBrains Mono: code, terminals, keys */
+  --font-mono: var(--font-mono), 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Typographic Scale (px) — Mirror landing page rhythm */
+  --text-2xs: 10px;   /* nav labels, badge text */
+  --text-xs: 11px;    /* meta, timestamps, section labels */
+  --text-sm: 13px;    /* body small, table cells */
+  --text-base: 14px;  /* body default */
+  --text-md: 15px;    /* emphasized body */
+  --text-lg: 16px;    /* card titles */
+  --text-xl: 18px;    /* section sub-headings */
+  --text-2xl: 22px;   /* card display headings */
+  --text-3xl: 26px;   /* page titles */
+  --text-4xl: 32px;   /* section titles */
+
+  /* ── Font Weights — aligned to landing page (light/thin brand) */
+  --fw-thin: 100;
+  --fw-light: 200;
+  --fw-regular: 300;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* ── Letter Spacing */
+  --tracking-tight: -0.04em;   /* hero, large display text */
+  --tracking-snug: -0.025em;   /* page titles, card headings */
+  --tracking-normal: -0.015em; /* body text */
+  --tracking-wide: 0.06em;     /* labels, badges */
+  --tracking-caps: 0.12em;     /* ALL CAPS labels */
+
+  /* ── Line Heights */
+  --leading-tight: 1.1;   /* large headings */
+  --leading-snug: 1.3;    /* medium headings, compact text */
+  --leading-normal: 1.6;  /* body text */
+  --leading-loose: 1.75;  /* descriptions, long-form */
+
+  /* ── Border Radii (Sharp & Angular — matches new aesthetic) */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
   --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  /* ── Shadows */
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.6);
   --shadow-glow: 0 0 20px rgba(0, 229, 255, 0.08);
+  --shadow-glow-lg: 0 0 40px rgba(0, 229, 255, 0.12);
+
+  /* ── Transitions */
   --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  --font-sans: var(--font-outfit), 'Outfit', sans-serif;
-  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+  --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Dashboard Specific Theme (OLED Minimal) ─────────── */
+/* ─── Dashboard Theme Override (OLED Minimal) ──────────── */
 .dashboard-theme {
   --bg-base: #09090b;
   --bg-surface: rgba(15, 15, 18, 0.6);
   --bg-elevated: rgba(255, 255, 255, 0.02);
-  --bg-input: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(0, 229, 255, 0.3);
-  --text-primary: #ffffff;
+  --bg-input: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.03);
+  --border-hover: rgba(0, 229, 255, 0.25);
+  --text-primary: #f4f4f5;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
-  --accent-dim: rgba(0, 229, 255, 0.08);
-
+  --text-faint: #3f3f46;
+  --accent-dim: rgba(0, 229, 255, 0.07);
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
@@ -66,23 +130,63 @@ body {
   background: var(--bg-base);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  font-size: var(--text-base);
+  font-weight: var(--fw-normal);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  letter-spacing: -0.015em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* ─── Heading Defaults ───────────────────────────────────── */
+/* Landing page uses font-weight: 200 (extra-light) for large headings.     */
+/* We mirror this: thin at display size, slightly heavier as it scales down. */
+h1 {
   font-family: var(--font-sans);
-  font-weight: 300;
-  letter-spacing: -0.03em;
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-light);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-light);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+}
+
+h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+}
+
+h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+h5, h6 {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-normal);
+}
+
+p {
+  line-height: var(--leading-normal);
+}
+
+code, pre {
+  font-family: var(--font-mono);
 }
 
 .mono {
@@ -584,9 +688,11 @@ input:-webkit-autofill:active {
 }
 
 .input-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);      /* 11px */
+  font-weight: var(--fw-medium);  /* 500 */
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
 }
 
 /* ─── Badge ──────────────────────────────────────────────── */
@@ -714,15 +820,16 @@ input:-webkit-autofill:active {
 }
 
 .modal {
-  background: rgba(10, 15, 10, 0.6);
+  /* Dark neutral — no green tint */
+  background: rgba(12, 12, 14, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-xl);
-  padding: 18px 32px;
+  padding: 28px 32px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 229, 255, 0.04);
   animation: fadeUp 0.3s ease;
 }
 
@@ -734,8 +841,11 @@ input:-webkit-autofill:active {
 }
 
 .modal-title {
-  font-size: 20px;
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);    /* 18px */
+  font-weight: var(--fw-light); /* 200 — consistent with page-title */
+  letter-spacing: var(--tracking-snug);
+  color: var(--text-primary);
 }
 
 .modal-close {
@@ -765,24 +875,28 @@ input:-webkit-autofill:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base); /* 14px */
 }
 
 th {
   text-align: left;
   padding: 10px 16px;
   color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);       /* 10px */
+  font-weight: var(--fw-medium);    /* 500 */
+  letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   border-bottom: 1px solid var(--border);
 }
 
 td {
   padding: 14px 16px;
-  border-bottom: 1px solid rgba(99, 102, 241, 0.06);
+  border-bottom: 1px solid var(--border-subtle); /* was indigo — now neutral */
   color: var(--text-secondary);
+  font-size: var(--text-sm);        /* 13px */
+  font-weight: var(--fw-regular);   /* 300 */
 }
 
 tr:last-child td {
@@ -951,16 +1065,22 @@ tr:hover td {
 }
 
 .user-name {
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);     /* 13px */
+  font-weight: var(--fw-medium); /* 500 — just enough weight for legibility */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
 }
 
 .user-email {
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);     /* 11px */
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 .main-content {
@@ -982,20 +1102,27 @@ tr:hover td {
 }
 
 .page-title {
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  font-family: 'Inter', system-ui, sans-serif;
-  /* High-end modern heading */
+  /* Outfit — brand font. Light weight like landing page large headings. */
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);   /* 26px */
+  font-weight: var(--fw-light); /* 200 — ultra-light, editorial feel */
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .page-subtitle {
-  font-size: 14px;
+  /* Recessed muted secondary — matches landing page .subtext style */
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);    /* 13px */
+  font-weight: var(--fw-regular); /* 300 */
   color: var(--text-muted);
-  margin-top: 2px;
-  letter-spacing: 0.01em;
+  margin-top: 4px;
+  letter-spacing: 0.005em;
+  line-height: var(--leading-snug);
 }
 
 .page-body {
@@ -1086,16 +1213,24 @@ tr:hover td {
 }
 
 .vault-item-name {
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);   /* 14px */
+  font-weight: var(--fw-normal); /* 400 */
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-primary);
 }
 
 .vault-item-service {
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);   /* 10px */
+  font-weight: var(--fw-normal);
   color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-top: 2px;
 }
 
 .vault-detail {
@@ -1172,20 +1307,27 @@ tr:hover td {
 }
 
 .stat-value {
+  /* Mono display number — controlled weight so it doesn't dominate */
+  font-family: var(--font-mono);
   font-size: 28px;
-  font-weight: 700;
+  font-weight: var(--fw-medium); /* 500 instead of 700 */
   letter-spacing: -0.03em;
-  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-primary);
 }
 
 .stat-label {
-  font-size: 13px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);     /* 11px */
+  font-weight: var(--fw-medium);
   color: var(--text-muted);
-  margin-top: 4px;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  margin-top: 6px;
 }
 
 .stat-delta {
-  font-size: 12px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
   color: var(--accent);
   margin-top: 8px;
 }
@@ -1201,7 +1343,7 @@ tr:hover td {
   align-items: flex-start;
   gap: 14px;
   padding: 14px 0;
-  border-bottom: 1px solid rgba(99, 102, 241, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .activity-item:last-child {
@@ -1268,8 +1410,11 @@ tr:hover td {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 18px;
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);      /* 16px — match sidebar brand */
+  font-weight: var(--fw-medium);  /* 500 */
+  letter-spacing: 2px;            /* spaced capitals — brand feel */
+  color: var(--text-primary);
 }
 
 .landing-nav-links {
@@ -1406,19 +1551,29 @@ tr:hover td {
 }
 
 .section-title {
-  font-size: 40px;
-  font-weight: 800;
+  /* Mirror landing page h2 — ultra-light gradient text */
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: var(--fw-light);  /* 200 */
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
   text-align: center;
-  letter-spacing: -0.03em;
   margin-bottom: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-sub {
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: var(--text-md);    /* 15px */
+  font-weight: var(--fw-regular);
   color: var(--text-secondary);
   text-align: center;
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto 64px;
+  line-height: var(--leading-loose);
 }
 
 .features-grid {
@@ -1456,15 +1611,20 @@ tr:hover td {
 }
 
 .feature-title {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);      /* 16px */
+  font-weight: var(--fw-regular); /* 300 — light & editorial */
+  letter-spacing: var(--tracking-snug);
+  color: var(--text-primary);
+  margin-bottom: 10px;
 }
 
 .feature-desc {
-  font-size: 14px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);    /* 14px */
+  font-weight: var(--fw-regular);
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: var(--leading-loose);
 }
 
 .pricing-section {
@@ -1569,7 +1729,9 @@ tr:hover td {
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background: radial-gradient(circle at 50% 50%, #080c08 0%, #000000 100%);
+  /* Pure dark — no green tint. Matches landing page bg #09090b */
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 229, 255, 0.04) 0%, transparent 60%),
+              #09090b;
   position: relative;
   overflow: hidden;
 }
@@ -1578,16 +1740,16 @@ tr:hover td {
   width: 100%;
   max-width: 480px;
   min-height: 520px;
-  /* Fixed — same for login & register */
-  background: rgba(10, 15, 10, 0.4);
+  /* Neutral dark glass — no green tint */
+  background: rgba(12, 12, 14, 0.6);
   backdrop-filter: blur(24px);
-  border: 1px solid rgba(0, 229, 255, 0.15);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-2xl);
   padding: 48px 52px;
-  /* Slightly less vertical padding */
   box-shadow: 0 32px 64px rgba(0, 0, 0, 0.8),
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 0 40px rgba(0, 229, 255, 0.03);
+    0 0 60px rgba(0, 229, 255, 0.03);
   animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   z-index: 10;
@@ -1780,11 +1942,160 @@ tr:hover td {
 }
 
 .vault-detail-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #F8FAFC;
-  letter-spacing: -0.035em;
+  /* Vault secret names: light editorial heading */
+  font-family: var(--font-sans);
+  font-size: var(--text-2xl);   /* 22px */
+  font-weight: var(--fw-light); /* 200 */
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-tight);
   text-transform: capitalize;
+  color: var(--text-primary);
   margin: 0;
-  line-height: 1.2;
 }
+
+
+/* ==========================================================================
+   TYPOGRAPHY UTILITIES — PhantomAPI Unified Text System
+   =========================================================================
+   Use these semantic classes across all pages to ensure consistency.
+   These mirror the landing page aesthetic: Outfit, ultra-light weights,
+   muted secondaries, and gradient display text.
+   ========================================================================== */
+
+/* ─── Display Text — Large Screen-Filling Headings ──────────────── */
+.text-display {
+  font-family: var(--font-sans);
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: var(--fw-thin);   /* 100 — like hero h1 on landing */
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.95;
+  background: linear-gradient(180deg, #ffffff 0%, #9ca3af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Gradient Text Utilities ───────────────────────────────────── */
+/* Apply gradient text fill like landing page headings */
+.text-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--accent) 0%, #60efff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Card Heading Variants ─────────────────────────────────────── */
+/* Use inside .card for section titles */
+.card-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);     /* 16px */
+  font-weight: var(--fw-regular); /* 300 */
+  letter-spacing: var(--tracking-snug);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Smaller card heading — secondary sections within a card */
+.card-subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);   /* 14px */
+  font-weight: var(--fw-normal); /* 400 */
+  letter-spacing: var(--tracking-normal);
+  color: var(--text-secondary);
+}
+
+/* ─── Body Text ─────────────────────────────────────────────────── */
+/* Standard body copy */
+.body-text {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);    /* 14px */
+  font-weight: var(--fw-regular); /* 300 */
+  color: var(--text-secondary);
+  line-height: var(--leading-loose);
+}
+
+/* Small secondary text */
+.body-small {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);      /* 13px */
+  font-weight: var(--fw-regular);
+  color: var(--text-muted);
+  line-height: var(--leading-snug);
+}
+
+/* ─── Label / Meta Text ──────────────────────────────────────────── */
+/* Uppercase section labels (like nav labels, step labels) */
+.label-caps {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);      /* 11px */
+  font-weight: var(--fw-medium);  /* 500 */
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Accent-colored label for active/highlighted states */
+.label-accent {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ─── Data / Mono Text ───────────────────────────────────────────── */
+/* Large numeric stat values */
+.data-value {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+  font-weight: var(--fw-medium);
+}
+
+/* Monospace key/value display */
+.data-key {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);     /* 11px */
+  font-weight: var(--fw-normal);
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ─── Helper Utilities ───────────────────────────────────────────── */
+.text-primary   { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-muted     { color: var(--text-muted) !important; }
+.text-faint     { color: var(--text-faint) !important; }
+.text-accent    { color: var(--accent) !important; }
+.text-red       { color: var(--red) !important; }
+.text-amber     { color: var(--amber) !important; }
+
+/* Weight helpers */
+.fw-thin     { font-weight: var(--fw-thin) !important; }
+.fw-light    { font-weight: var(--fw-light) !important; }
+.fw-regular  { font-weight: var(--fw-regular) !important; }
+.fw-normal   { font-weight: var(--fw-normal) !important; }
+.fw-medium   { font-weight: var(--fw-medium) !important; }
+.fw-semibold { font-weight: var(--fw-semibold) !important; }
+
+/* Size helpers */
+.text-2xs  { font-size: var(--text-2xs) !important; }
+.text-xs   { font-size: var(--text-xs) !important; }
+.text-sm   { font-size: var(--text-sm) !important; }
+.text-base { font-size: var(--text-base) !important; }
+.text-md   { font-size: var(--text-md) !important; }
+.text-lg   { font-size: var(--text-lg) !important; }
+.text-xl   { font-size: var(--text-xl) !important; }
+.text-2xl  { font-size: var(--text-2xl) !important; }
+.text-3xl  { font-size: var(--text-3xl) !important; }
+.text-4xl  { font-size: var(--text-4xl) !important; }
